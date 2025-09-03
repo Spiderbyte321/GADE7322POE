@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa0e18588244a159375512dcdf5927f, type: 3}
   m_Name: TestPlayerSet
   m_EditorClassIdentifier: 
-  tileMesh: {fileID: 5503436514220359848, guid: cd9ffc11a27c6284893a938e78a3972a, type: 3}
-  topConstraint: {fileID: 0}
-  rightConstraint: {fileID: 0}
-  bottomConstraint: {fileID: 0}
-  leftConstraint: {fileID: 0}
+  tileMeshObject: {fileID: 919132149155446097, guid: cd9ffc11a27c6284893a938e78a3972a, type: 3}
+  topConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
+  rightConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
+  bottomConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
+  leftConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
