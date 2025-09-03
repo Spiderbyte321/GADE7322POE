@@ -27,7 +27,9 @@ public class TerrainGenerator : MonoBehaviour
         do
         {
           BuildGrid();
+          ChooseLowestEntropyTile();
         } while(CollapsedTiles.Count<GridTiles.Length);
+        
     }
     
 
@@ -63,12 +65,8 @@ public class TerrainGenerator : MonoBehaviour
     {
         int RandomX = UnityEngine.Random.Range(0, GridBreadth);
         int RandomY = UnityEngine.Random.Range(0, GridHeight);
-
-        if(GridTiles[RandomX, RandomY].Collapsed)
-        {
-          PlaceEnemyTower();  
-        }
-
+        
+        
         CurrentTile = GridTiles[RandomX, RandomY];
         CurrentTile.Collapse(EnemyTower);
         CollapsedTiles.Add(CurrentTile);
@@ -76,11 +74,16 @@ public class TerrainGenerator : MonoBehaviour
 
     private void ChooseLowestEntropyTile()
     {
-        foreach (Tile EntropicTile in GridTiles)
+        for (int X = 0; X < GridBreadth; X++)
         {
-            if(!EntropicTile.Collapsed&&EntropicTile.Entropy <= CurrentTile.Entropy)
+            for (int Y = 0; Y < GridHeight; Y++)
             {
-                CurrentTile = EntropicTile;
+                if(!GridTiles[X,Y].Collapsed)
+                {
+                    CurrentTile = GridTiles[X, Y];
+                }
+
+                //Debug.Log("Grid Entropy: "+GridTiles[X,Y].Entropy+"tile entropy: "+CurrentTile.Entropy);
             }
         }
     }
@@ -89,12 +92,12 @@ public class TerrainGenerator : MonoBehaviour
     
     private void BuildGrid()
     {
-       
-        CurrentTile.Collapse();
-        CollapsedTiles.Add(CurrentTile);
-        PropogateCollapse();
-        ChooseLowestEntropyTile();
-       
+        if(!CurrentTile.Collapsed)
+        {
+          CurrentTile.Collapse();
+          CollapsedTiles.Add(CurrentTile);
+          PropogateCollapse();
+        }
     }
 
 

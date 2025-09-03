@@ -11,23 +11,22 @@ using Random = UnityEngine.Random;
         [SerializeField] private List<TileSet> TileInfo;
         private TileSet collapseInfo;
         private bool collapsed;
-        private Vector2 tilePosition;
+        private Vector2Int tilePosition;
 
         public bool Collapsed => collapsed;
         public int Entropy => TileInfo.Count;
         public TileSet CollapseInfo => collapseInfo;
-        public Vector2 TilePosition => tilePosition;
+        public Vector2Int TilePosition => tilePosition;
 
 
         private void Start()
         {
-            tilePosition = new Vector2(transform.position.x, transform.position.z);
+            tilePosition = new Vector2Int((int)gameObject.transform.position.x,(int) gameObject.transform.position.z);
         }
 
 
         public void AmendTile(IEdgeConstraint AConstraint,EDirection ADirection)
         {
-            Debug.Log("test");
             for(int i = 0; i < TileInfo.Count; i++)
             {
                 if(!TileInfo[i].OppositeConstraint(ADirection).Matches(AConstraint))
@@ -41,7 +40,7 @@ using Random = UnityEngine.Random;
         {
             collapsed = true;
             collapseInfo = TileInfo[Random.Range(0, TileInfo.Count)];
-            Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
+            Instantiate(CollapseInfo.TileMeshObject,this.gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
         
@@ -49,8 +48,21 @@ using Random = UnityEngine.Random;
 
         public void Collapse(TileSet ATileSet)//Allows for specification of what you want
         {
+            if(!TileInfo.Contains(ATileSet))
+            {
+                Debug.Log("WronType");
+                return;
+            }
             collapsed = true;
-            collapseInfo = ATileSet;
+            TileSet ComparedSet = null;
+            foreach (TileSet HeldSet in TileInfo)
+            {
+                if(HeldSet == ATileSet)
+                {
+                    ComparedSet = HeldSet;
+                }
+            }
+            collapseInfo = ComparedSet;
             Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
