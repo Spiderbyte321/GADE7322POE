@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
     public class Tile:MonoBehaviour
     {
-        [SerializeField] private MeshFilter TileRenderer;
+        
         [SerializeField] private List<TileSet> TileInfo;
         private TileSet collapseInfo;
         private bool collapsed;
@@ -27,6 +27,7 @@ using Random = UnityEngine.Random;
 
         public void AmendTile(IEdgeConstraint AConstraint,EDirection ADirection)
         {
+            Debug.Log("test");
             for(int i = 0; i < TileInfo.Count; i++)
             {
                 if(!TileInfo[i].OppositeConstraint(ADirection).Matches(AConstraint))
@@ -40,7 +41,7 @@ using Random = UnityEngine.Random;
         {
             collapsed = true;
             collapseInfo = TileInfo[Random.Range(0, TileInfo.Count)];
-            TileRenderer.mesh = collapseInfo.TileMesh;
+            Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
         
@@ -50,7 +51,7 @@ using Random = UnityEngine.Random;
         {
             collapsed = true;
             collapseInfo = ATileSet;
-            TileRenderer.mesh = collapseInfo.TileMesh;
+            Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
         }

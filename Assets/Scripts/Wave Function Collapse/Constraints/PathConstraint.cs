@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PathConstraint", menuName = "Scriptable Objects/PathConstraint")]
-public class PathConstraint : ScriptableObject,IEdgeConstraint
+public class PathConstraint :  EdgeConstraint
 {
-    public bool Matches(IEdgeConstraint AotherConstraint)
+    public override bool Matches(IEdgeConstraint AotherConstraint)
     {
         return AotherConstraint is PathConstraint;
     }

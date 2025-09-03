@@ -5,6 +5,7 @@ using Unity.Mathematics;
 
 public class TerrainGenerator : MonoBehaviour
 {
+    [SerializeField] private GameObject TileParent;
     [SerializeField] private GameObject TilePrefab;
     [SerializeField] private int[] GridXRange=new int[ArraySizes];
     [SerializeField] private int[] GridYRange = new int[ArraySizes];
@@ -28,6 +29,7 @@ public class TerrainGenerator : MonoBehaviour
           BuildGrid();
         } while(CollapsedTiles.Count<GridTiles.Length);
     }
+    
 
     private void InitialiseGrid()//creates the grid and populates it with prefab instances
     {
@@ -42,6 +44,7 @@ public class TerrainGenerator : MonoBehaviour
                 Vector3 SpawnVector = new Vector3(i, 0,j);
                 GameObject SpawnObject = Instantiate(TilePrefab, SpawnVector, quaternion.identity);
                 SpawnObject.TryGetComponent(out TempTile);
+                SpawnObject.transform.SetParent(TileParent.transform);
                 GridTiles[i,j] = TempTile;
             }
         }
@@ -97,21 +100,21 @@ public class TerrainGenerator : MonoBehaviour
 
     private void PropogateCollapse()
     {
-        //for(int x = 0; x < GridX; x++)
+        for(int x = 0; x < GridBreadth; x++)
         {
-            //for(int y = 0; y < GridY; y++)
+            for(int y = 0; y < GridHeight; y++)
             {
-                //if(!GridTiles[x, y].Collapsed) 
-                    //continue;
+                if(!GridTiles[x, y].Collapsed) 
+                    continue;
                 
-                //if(x+1>0&&x+1<GridX-1) 
-                    //GridTiles[x+1,y].AmendTile(GridTiles[x,y].CollapseInfo.LeftConstraint,EDirection.East);
-                //if(x-1>0&&x-1<GridX-1)
-                    //GridTiles[x-1,y].AmendTile(GridTiles[x,y].CollapseInfo.RightConstraint,EDirection.West);
-                //if(y+1>0&&y+1<GridY-1)
-                    //GridTiles[x,y + 1].AmendTile(GridTiles[x,y].CollapseInfo.BottomConstraint,EDirection.North);
-                //if(y-1>0&&y-1<GridY-1)
-                    //GridTiles[x,y-1].AmendTile(GridTiles[x,y].CollapseInfo.TopConstraint,EDirection.South);
+                if(x+1>0&&x+1<GridBreadth-1) 
+                    GridTiles[x+1,y].AmendTile(GridTiles[x,y].CollapseInfo.LeftConstraint,EDirection.East);
+                if(x-1>0&&x-1<GridBreadth-1)
+                    GridTiles[x-1,y].AmendTile(GridTiles[x,y].CollapseInfo.RightConstraint,EDirection.West);
+                if(y+1>0&&y+1<GridHeight-1)
+                    GridTiles[x,y + 1].AmendTile(GridTiles[x,y].CollapseInfo.BottomConstraint,EDirection.North);
+                if(y-1>0&&y-1<GridHeight-1)
+                    GridTiles[x,y-1].AmendTile(GridTiles[x,y].CollapseInfo.TopConstraint,EDirection.South);
             }
         }
     }

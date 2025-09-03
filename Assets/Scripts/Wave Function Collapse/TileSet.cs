@@ -3,14 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TileSet", menuName = "Scriptable Objects/TileSet")]
 public class TileSet : ScriptableObject
 {
-    [SerializeField] private Mesh tileMesh;
+    [SerializeField] private GameObject tileMeshObject;
 
     [SerializeField] private EdgeConstraint topConstraint;
     [SerializeField] private EdgeConstraint rightConstraint;
     [SerializeField] private EdgeConstraint bottomConstraint;
     [SerializeField] private EdgeConstraint leftConstraint;
 
-    public Mesh TileMesh => tileMesh;
+    public GameObject TileMeshObject => tileMeshObject;
     public EdgeConstraint TopConstraint => topConstraint;
     public EdgeConstraint RightConstraint => rightConstraint;
     public EdgeConstraint BottomConstraint => bottomConstraint;
