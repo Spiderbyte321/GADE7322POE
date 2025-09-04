@@ -153,7 +153,7 @@ MonoBehaviour:
   GridXRange: 0300000007000000
   GridYRange: 0300000007000000
   PlayerTower: {fileID: 11400000, guid: a94baaab57fd0e144a32ee128756be48, type: 2}
-  EnemyTower: {fileID: 11400000, guid: a94baaab57fd0e144a32ee128756be48, type: 2}
+  EnemyTower: {fileID: 11400000, guid: f19a320346cd958489d73bc25e83a851, type: 2}
 --- !u!4 &176994259
 Transform:
   m_ObjectHideFlags: 0

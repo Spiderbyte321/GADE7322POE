@@ -23,13 +23,12 @@ public class TerrainGenerator : MonoBehaviour
         InitialiseGrid();
         PlacePlayerTower();
         PlaceEnemyTower();
-        ChooseLowestEntropyTile();
+        CurrentTile=ChooseLowestEntropyTile();
         do
         {
           BuildGrid();
-          ChooseLowestEntropyTile();
+          CurrentTile=ChooseLowestEntropyTile();
         } while(CollapsedTiles.Count<GridTiles.Length);
-        
     }
     
 
@@ -72,20 +71,42 @@ public class TerrainGenerator : MonoBehaviour
         CollapsedTiles.Add(CurrentTile);
     }
 
-    private void ChooseLowestEntropyTile()
+    private Tile ChooseLowestEntropyTile()
     {
-        for (int X = 0; X < GridBreadth; X++)
+        //returns lowest entropy tile
+        //get all the tiles into a 1d array
+        //sort by entropy
+        //return the first element
+        
+        CollapsedTiles.Clear();
+        CollapsedTiles = new List<Tile>();
+        
+        List<Tile> EntroipicTiles = new List<Tile>();
+        for (int x = 0;  x<GridBreadth; x++)
         {
-            for (int Y = 0; Y < GridHeight; Y++)
+            for (int y = 0; y < GridHeight; y++)
             {
-                if(!GridTiles[X,Y].Collapsed)
+                if(!GridTiles[x, y].Collapsed)
                 {
-                    CurrentTile = GridTiles[X, Y];
+                  EntroipicTiles.Add(GridTiles[x,y]);  
                 }
-
-                //Debug.Log("Grid Entropy: "+GridTiles[X,Y].Entropy+"tile entropy: "+CurrentTile.Entropy);
+                else
+                {
+                   CollapsedTiles.Add(GridTiles[x,y]); 
+                }
             }
         }
+
+        Tile[] EntropicTilesArray = EntroipicTiles.ToArray();
+        Array.Sort(EntropicTilesArray,(a,b)=>a.Entropy.CompareTo(b.Entropy));
+
+        if(EntropicTilesArray.Length!=0)
+        {
+           return EntropicTilesArray[0]; 
+        }
+        
+        return CurrentTile;
+        
     }
     
     
