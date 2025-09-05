@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileInfo:
-  - {fileID: 11400000, guid: 7e5c93e96e366b449bf0e34c1374ab0e, type: 2}
-  - {fileID: 11400000, guid: f19a320346cd958489d73bc25e83a851, type: 2}
-  - {fileID: 11400000, guid: a94baaab57fd0e144a32ee128756be48, type: 2}
+  - {fileID: 11400000, guid: 42c3f31939a047c4da7d2f4532c6b600, type: 2}
+  - {fileID: 11400000, guid: 2f3a403441dd1724ea1f68522d2fe3d1, type: 2}
+  - {fileID: 11400000, guid: 6bfdce7a6c8d3a3478b3eeee9c9ed65f, type: 2}
+  Default: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}

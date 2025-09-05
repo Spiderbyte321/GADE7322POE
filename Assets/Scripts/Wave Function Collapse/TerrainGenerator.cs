@@ -117,30 +117,91 @@ public class TerrainGenerator : MonoBehaviour
         {
           CurrentTile.Collapse();
           CollapsedTiles.Add(CurrentTile);
-          PropogateCollapse();
+          PropogateCollapse(CurrentTile);
         }
     }
 
 
-    private void PropogateCollapse()
+    private void PropogateCollapse(Tile CollapsedTile)
     {
-        for(int x = 0; x < GridBreadth; x++)
+        Queue<Tile> PropogationQueue = new Queue<Tile>();
+        HashSet<Tile> EnquedTiles = new HashSet<Tile>();
+        Tile[] Neighbours = ReturnNeighbours(CollapsedTile);
+        foreach (Tile neighbour in Neighbours)
         {
-            for(int y = 0; y < GridHeight; y++)
-            {
-                if(!GridTiles[x, y].Collapsed) 
-                    continue;
-                
-                if(x+1>0&&x+1<GridBreadth-1) 
-                    GridTiles[x+1,y].AmendTile(GridTiles[x,y].CollapseInfo.LeftConstraint,EDirection.East);
-                if(x-1>0&&x-1<GridBreadth-1)
-                    GridTiles[x-1,y].AmendTile(GridTiles[x,y].CollapseInfo.RightConstraint,EDirection.West);
-                if(y+1>0&&y+1<GridHeight-1)
-                    GridTiles[x,y + 1].AmendTile(GridTiles[x,y].CollapseInfo.BottomConstraint,EDirection.North);
-                if(y-1>0&&y-1<GridHeight-1)
-                    GridTiles[x,y-1].AmendTile(GridTiles[x,y].CollapseInfo.TopConstraint,EDirection.South);
-            }
+            PropogationQueue.Enqueue(neighbour);
+            EnquedTiles.Add(neighbour);
         }
+        
+        
+        do
+        {
+            
+            
+            Tile AmendNeighbour = PropogationQueue.Dequeue();
+            EnquedTiles.Remove(AmendNeighbour);
+            int OriginalCount = AmendNeighbour.Entropy;
+            if(AmendNeighbour.Collapsed)
+            {
+              continue;  
+            }
+
+            if(AmendNeighbour.TilePosition.x+1<GridBreadth&&GridTiles[AmendNeighbour.TilePosition.x + 1, AmendNeighbour.TilePosition.y].Collapsed)
+            {
+
+                
+                EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
+                    GridTiles[AmendNeighbour.TilePosition.x + 1, 
+                        AmendNeighbour.TilePosition.y]);
+                AmendNeighbour.AmendTile(GridTiles[AmendNeighbour.TilePosition.x+1,
+                    AmendNeighbour.TilePosition.y].CollapseInfo.LeftConstraint,Direction);
+            }//double check this will work cause ammend tile assumes the origin constraint is on origin
+            
+            if(AmendNeighbour.TilePosition.x-1>0&&GridTiles[AmendNeighbour.TilePosition.x - 1, AmendNeighbour.TilePosition.y].Collapsed)
+            {
+
+                
+                
+                EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
+                    GridTiles[AmendNeighbour.TilePosition.x - 1, 
+                        AmendNeighbour.TilePosition.y]);
+                AmendNeighbour.AmendTile(GridTiles[AmendNeighbour.TilePosition.x-1,
+                    AmendNeighbour.TilePosition.y].CollapseInfo.RightConstraint,Direction);
+            }
+            
+            if(AmendNeighbour.TilePosition.y+1<GridHeight&&GridTiles[AmendNeighbour.TilePosition.x, AmendNeighbour.TilePosition.y+1].Collapsed)
+            {
+                
+                EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
+                    GridTiles[AmendNeighbour.TilePosition.x, 
+                        AmendNeighbour.TilePosition.y+1]);
+                AmendNeighbour.AmendTile(GridTiles[AmendNeighbour.TilePosition.x,
+                    AmendNeighbour.TilePosition.y+1].CollapseInfo.BottomConstraint,Direction);
+            }
+            
+            if (AmendNeighbour.TilePosition.y-1>0&&GridTiles[AmendNeighbour.TilePosition.x , AmendNeighbour.TilePosition.y-1].Collapsed)
+            {
+                
+                EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
+                    GridTiles[AmendNeighbour.TilePosition.x, 
+                        AmendNeighbour.TilePosition.y-1]);
+                AmendNeighbour.AmendTile(GridTiles[AmendNeighbour.TilePosition.x,
+                    AmendNeighbour.TilePosition.y-1].CollapseInfo.TopConstraint,Direction);
+            }
+            
+            if(AmendNeighbour.Entropy < OriginalCount)
+            {
+                foreach(Tile neighbour in ReturnNeighbours(AmendNeighbour))
+                {
+                    if(!EnquedTiles.Contains(neighbour))
+                    {
+                      PropogationQueue.Enqueue(neighbour);
+                      EnquedTiles.Add(neighbour);
+                    }
+                } 
+            }
+        } while (PropogationQueue.Count>0);
+        
     }
 
 
@@ -158,5 +219,24 @@ public class TerrainGenerator : MonoBehaviour
             Debug.Log("Resized GridY to "+ArraySizes);
         }
         
+    }
+    
+    private Tile[] ReturnNeighbours(Tile TileOrigin)
+    {
+        List<Tile> ReturnArray = new List<Tile>();
+        
+        if(TileOrigin.TilePosition.x+1<GridBreadth) 
+            ReturnArray.Add(GridTiles[TileOrigin.TilePosition.x+1,TileOrigin.TilePosition.y]);
+        
+        if(TileOrigin.TilePosition.x-1>0) 
+            ReturnArray.Add(GridTiles[TileOrigin.TilePosition.x-1,TileOrigin.TilePosition.y]);
+        
+        if(TileOrigin.TilePosition.y+1<GridHeight) 
+            ReturnArray.Add(GridTiles[TileOrigin.TilePosition.x,TileOrigin.TilePosition.y+1]);
+        
+        if(TileOrigin.TilePosition.y-1>0)
+            ReturnArray.Add(GridTiles[TileOrigin.TilePosition.x,TileOrigin.TilePosition.y-1]);
+
+        return ReturnArray.ToArray();
     }
 }

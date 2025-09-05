@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
     {
         
         [SerializeField] private List<TileSet> TileInfo;
+        [SerializeField] private TileSet Default;
         private TileSet collapseInfo;
         private bool collapsed;
         private Vector2Int tilePosition;
@@ -27,11 +28,11 @@ using Random = UnityEngine.Random;
 
         public void AmendTile(IEdgeConstraint AConstraint,EDirection ADirection)
         {
-            for(int i = 0; i < TileInfo.Count; i++)
+            for(int i = TileInfo.Count-1; i >=0; i--)
             {
                 if(!TileInfo[i].OppositeConstraint(ADirection).Matches(AConstraint))
                 {
-                    TileInfo.Remove(TileInfo[i]);
+                    TileInfo.RemoveAt(i);
                 }
             }
         }//takes in direction of origin constraint and what it is check if each of our tilesets have that if not chuck it
@@ -39,6 +40,11 @@ using Random = UnityEngine.Random;
         public void Collapse()//Randomly selects any
         {
             collapsed = true;
+            if(TileInfo.Count == 0)
+            {
+                CollapseToDefault();
+                return;
+            }
             collapseInfo = TileInfo[Random.Range(0, TileInfo.Count)];
             Instantiate(CollapseInfo.TileMeshObject,this.gameObject.transform);
             TileInfo.Clear();
@@ -50,7 +56,7 @@ using Random = UnityEngine.Random;
         {
             if(!TileInfo.Contains(ATileSet))
             {
-                Debug.Log("WronType");
+                CollapseToDefault();
                 return;
             }
             collapsed = true;
@@ -66,5 +72,14 @@ using Random = UnityEngine.Random;
             Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
+        }
+
+        private void CollapseToDefault()
+        {
+            collapsed = true;
+            collapseInfo = Default;
+            Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
+            TileInfo.Clear();
+            TileInfo.Add(collapseInfo); 
         }
     }
