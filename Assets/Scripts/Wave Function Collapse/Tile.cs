@@ -19,9 +19,10 @@ using Random = UnityEngine.Random;
         public TileSet CollapseInfo => collapseInfo;
         public Vector2Int TilePosition => tilePosition;
 
+        
 
-        private void Start()
-        {
+        public void InitialiseTile()
+        { 
             tilePosition = new Vector2Int((int)gameObject.transform.position.x,(int) gameObject.transform.position.z);
         }
 
@@ -54,24 +55,13 @@ using Random = UnityEngine.Random;
 
         public void Collapse(TileSet ATileSet)//Allows for specification of what you want
         {
-            if(!TileInfo.Contains(ATileSet))
-            {
-                CollapseToDefault();
-                return;
-            }
             collapsed = true;
-            TileSet ComparedSet = null;
-            foreach (TileSet HeldSet in TileInfo)
-            {
-                if(HeldSet == ATileSet)
-                {
-                    ComparedSet = HeldSet;
-                }
-            }
+            TileSet ComparedSet = ATileSet;
             collapseInfo = ComparedSet;
             Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
+            
         }
 
         private void CollapseToDefault()

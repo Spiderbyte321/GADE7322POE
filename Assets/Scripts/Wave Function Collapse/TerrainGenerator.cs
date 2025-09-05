@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
-public class TerrainGenerator : MonoBehaviour
+public class TerrainGenerator : Pathfinder
 {
     [SerializeField] private GameObject TileParent;
     [SerializeField] private GameObject TilePrefab;
@@ -11,24 +11,32 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private int[] GridYRange = new int[ArraySizes];
     [SerializeField] private TileSet PlayerTower;
     [SerializeField] private TileSet EnemyTower;
+    [SerializeField] private int EnemyShrinesAmount;
     private List<Tile> CollapsedTiles = new List<Tile>();
     private const int ArraySizes = 2;
     private int GridBreadth;
     private int GridHeight;
     private Tile[,] GridTiles;
     private Tile CurrentTile;
+    private Tile PlayerBase;
+    private List<List<Tile>> Paths = new List<List<Tile>>();
 
     private void Start()
     {
         InitialiseGrid();
         PlacePlayerTower();
-        PlaceEnemyTower();
-        CurrentTile=ChooseLowestEntropyTile();
+        
+        for(int i=0;i<EnemyShrinesAmount;i++)
+            PlaceEnemyTower();
+        
+        CreatePathways();
+        
+        /*CurrentTile=ChooseLowestEntropyTile();
         do
         {
           BuildGrid();
           CurrentTile=ChooseLowestEntropyTile();
-        } while(CollapsedTiles.Count<GridTiles.Length);
+        } while(CollapsedTiles.Count<GridTiles.Length);*/
     }
     
 
@@ -47,6 +55,7 @@ public class TerrainGenerator : MonoBehaviour
                 SpawnObject.TryGetComponent(out TempTile);
                 SpawnObject.transform.SetParent(TileParent.transform);
                 GridTiles[i,j] = TempTile;
+                GridTiles[i,j].InitialiseTile();
             }
         }
     }
@@ -57,7 +66,11 @@ public class TerrainGenerator : MonoBehaviour
         int RandomY = UnityEngine.Random.Range(0, GridHeight-1);
         CurrentTile = GridTiles[RandomX,RandomY];
         CurrentTile.Collapse(PlayerTower);
+        PlayerBase = CurrentTile;
+        PropogateCollapse(CurrentTile);
         CollapsedTiles.Add(CurrentTile);
+        
+        Debug.Log("Player position"+CurrentTile.TilePosition);
     }
 
     private void PlaceEnemyTower()
@@ -68,8 +81,31 @@ public class TerrainGenerator : MonoBehaviour
         
         CurrentTile = GridTiles[RandomX, RandomY];
         CurrentTile.Collapse(EnemyTower);
+        PropogateCollapse(CurrentTile);
+        CreateFrontier(CurrentTile.TilePosition,GridTiles);
+        List<Tile> Path =GetPath(PlayerBase,CurrentTile);
+
+        Paths.Add(Path);
+        
+        
         CollapsedTiles.Add(CurrentTile);
     }
+
+    private void CreatePathways()
+    {
+
+        foreach (List<Tile> path in Paths)
+        {
+            foreach (Tile pathpoint in path)
+            {
+                pathpoint.Collapse();
+                PropogateCollapse(pathpoint);
+                CollapsedTiles.Add(pathpoint);
+            }
+        }
+        
+    }
+        
 
     private Tile ChooseLowestEntropyTile()
     {
