@@ -154,7 +154,11 @@ MonoBehaviour:
   GridYRange: 0a00000014000000
   PlayerTower: {fileID: 11400000, guid: a94baaab57fd0e144a32ee128756be48, type: 2}
   EnemyTower: {fileID: 11400000, guid: f19a320346cd958489d73bc25e83a851, type: 2}
+  TransitionTileSet: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}
+  PlayerDefenderSet: {fileID: 11400000, guid: 7543233505ba9234086ebf58646b4ef7, type: 2}
   EnemyShrinesAmount: 2
+  ShrineOffset: 5
+  PlayerTowerDensity: 2
 --- !u!4 &176994259
 Transform:
   m_ObjectHideFlags: 0

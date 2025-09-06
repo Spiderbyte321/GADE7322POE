@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 using Unity.Mathematics;
+using Random = System.Random;
 
 public class TerrainGenerator : Pathfinder
 {
@@ -11,7 +13,11 @@ public class TerrainGenerator : Pathfinder
     [SerializeField] private int[] GridYRange = new int[ArraySizes];
     [SerializeField] private TileSet PlayerTower;
     [SerializeField] private TileSet EnemyTower;
+    [SerializeField] private TileSet TransitionTileSet;
+    [SerializeField] private TileSet PlayerDefenderSet;
     [SerializeField] private int EnemyShrinesAmount;
+    [SerializeField] private int ShrineOffset;
+    [SerializeField] private int PlayerTowerDensity;
     private List<Tile> CollapsedTiles = new List<Tile>();
     private const int ArraySizes = 2;
     private int GridBreadth;
@@ -20,6 +26,7 @@ public class TerrainGenerator : Pathfinder
     private Tile CurrentTile;
     private Tile PlayerBase;
     private List<List<Tile>> Paths = new List<List<Tile>>();
+    private Dictionary<List<Tile>, Tile> TransitionTiles = new Dictionary<List<Tile>, Tile>();
 
     private void Start()
     {
@@ -30,9 +37,10 @@ public class TerrainGenerator : Pathfinder
             PlaceEnemyTower();
         
         CreatePathways();
+        PlaceAllyTowerSpots();
         
-        /*CurrentTile=ChooseLowestEntropyTile();
-        do
+        CurrentTile=ChooseLowestEntropyTile();
+        /*do
         {
           BuildGrid();
           CurrentTile=ChooseLowestEntropyTile();
@@ -70,13 +78,26 @@ public class TerrainGenerator : Pathfinder
         PropogateCollapse(CurrentTile);
         CollapsedTiles.Add(CurrentTile);
         
-        Debug.Log("Player position"+CurrentTile.TilePosition);
     }
 
     private void PlaceEnemyTower()
     {
-        int RandomX = UnityEngine.Random.Range(0, GridBreadth);
-        int RandomY = UnityEngine.Random.Range(0, GridHeight);
+        int RandomX;
+        int RandomY;
+
+        int enemyTowerXOffset;
+        int playerTowerXOffset;
+        
+        do
+        {
+            RandomX = UnityEngine.Random.Range(0, GridBreadth);
+            RandomY = UnityEngine.Random.Range(0, GridHeight);
+
+            enemyTowerXOffset = GridBreadth - RandomX;
+            playerTowerXOffset = GridBreadth - PlayerBase.TilePosition.x;
+
+        } while (Math.Abs(enemyTowerXOffset-playerTowerXOffset)<ShrineOffset);
+        
         
         
         CurrentTile = GridTiles[RandomX, RandomY];
@@ -84,10 +105,7 @@ public class TerrainGenerator : Pathfinder
         PropogateCollapse(CurrentTile);
         CreateFrontier(CurrentTile.TilePosition,GridTiles);
         List<Tile> Path =GetPath(PlayerBase,CurrentTile);
-
         Paths.Add(Path);
-        
-        
         CollapsedTiles.Add(CurrentTile);
     }
 
@@ -96,6 +114,12 @@ public class TerrainGenerator : Pathfinder
 
         foreach (List<Tile> path in Paths)
         {
+
+            Tile TransitionTile;
+            TransitionTile = path[UnityEngine.Random.Range(0,path.Count/2)];//chat to erin about this
+            TransitionTile.Collapse(TransitionTileSet);
+            TransitionTiles.Add(path,TransitionTile);
+            
             foreach (Tile pathpoint in path)
             {
                 pathpoint.Collapse();
@@ -103,7 +127,66 @@ public class TerrainGenerator : Pathfinder
                 CollapsedTiles.Add(pathpoint);
             }
         }
-        
+    }
+
+    private void PlaceAllyTowerSpots()//sort out last bit
+    {
+        foreach (List<Tile> path in Paths)
+        {
+            List<Tile> TotalPath = new List<Tile>();
+            path.Reverse();
+            TotalPath = path;
+
+            List<Tile> PlayerPath = new List<Tile>();
+            Vector2 PathTransition = TransitionTiles[path].TilePosition;
+            
+            foreach(Tile PathPoint in TotalPath)
+            {
+                if(PathPoint.TilePosition==PathTransition)
+                    break;
+                
+                PlayerPath.Add(PathPoint);
+                
+            }
+
+            for(int i = 0; i < PlayerTowerDensity; i++)
+            {
+                int RandomTileIndex = UnityEngine.Random.Range(0, PlayerPath.Count);
+
+                Tile[] TilePointNeighbours = ReturnNeighbours(PlayerPath[RandomTileIndex]);
+                List<Tile> PossiblePlacements = new List<Tile>();
+                
+                
+                foreach (Tile neighbour in TilePointNeighbours)
+                {
+                    if (neighbour.Collapsed)
+                        continue;
+
+                    
+                    PossiblePlacements.Add(neighbour);
+                }
+
+                Dictionary<EDirection, EdgeConstraint> PLayerTowerConstraints =
+                                        new Dictionary<EDirection, EdgeConstraint>();
+
+                Tile ChosenPlacement = PossiblePlacements[UnityEngine.Random.Range(0, PossiblePlacements.Count)];
+                EDirection DirectionToRoad =
+                    DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);
+
+                PLayerTowerConstraints[DirectionToRoad] = ScriptableObject.CreateInstance<PathConstraint>();
+
+                foreach (EDirection direction in Enum.GetValues(typeof(EDirection)))
+                {
+                    PLayerTowerConstraints.TryAdd(direction, ScriptableObject.CreateInstance<PathConstraint>());
+                }
+                
+                
+                PlayerDefenderSet.InitialiseTileSet(PLayerTowerConstraints);
+                ChosenPlacement.Collapse(PlayerDefenderSet);
+            }
+            
+            
+        }
     }
         
 

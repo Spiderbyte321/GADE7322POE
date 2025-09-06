@@ -20,7 +20,7 @@ public static class DirectionUtilities
         return EDirection.North;
     }
 
-    public static EDirection ReturnTileDirection(Tile Origin,Tile Direction)//fix the issue where 0:0 comes in
+    public static EDirection ReturnTileDirection(Tile Origin,Tile Direction)
     {
         Vector2Int Delta = Direction.TilePosition - Origin.TilePosition;
 

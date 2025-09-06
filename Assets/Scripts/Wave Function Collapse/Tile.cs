@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,6 +41,9 @@ using Random = UnityEngine.Random;
 
         public void Collapse()//Randomly selects any
         {
+            if(collapsed)
+                return;
+            
             collapsed = true;
             if(TileInfo.Count == 0)
             {
@@ -55,6 +59,13 @@ using Random = UnityEngine.Random;
 
         public void Collapse(TileSet ATileSet)//Allows for specification of what you want
         {
+            if(collapsed)
+            {
+                 Debug.Log("Already Collapsed");
+                 return;
+            }
+               
+            
             collapsed = true;
             TileSet ComparedSet = ATileSet;
             collapseInfo = ComparedSet;
@@ -63,6 +74,7 @@ using Random = UnityEngine.Random;
             TileInfo.Add(collapseInfo);
             
         }
+        
 
         private void CollapseToDefault()
         {
