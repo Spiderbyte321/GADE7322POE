@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7353904286825953442}
   - component: {fileID: 8870591311847804362}
   - component: {fileID: 4860661031332281308}
+  - component: {fileID: 588256057818076219}
   m_Layer: 0
   m_Name: TileObject
   m_TagString: Untagged
@@ -104,3 +105,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f3a403441dd1724ea1f68522d2fe3d1, type: 2}
   - {fileID: 11400000, guid: 6bfdce7a6c8d3a3478b3eeee9c9ed65f, type: 2}
   Default: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}
+--- !u!65 &588256057818076219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7154264584798805888}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

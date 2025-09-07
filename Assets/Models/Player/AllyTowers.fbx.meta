@@ -3,7 +3,27 @@ guid: 525952c625acdc441bfd316af7cabe6e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AllyTower
+    second: {fileID: 2100000, guid: 8728c758b6f273d4e932ac9cbbd28390, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 6548612c9c7ca874aa70603bfc24586b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AllyTowerMiddleColor
+    second: {fileID: 2800000, guid: 778885d2af42714428096e9d558e08b5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: d160c860096fbd3428b74d06b10ce6de, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

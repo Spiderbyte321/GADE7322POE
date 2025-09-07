@@ -163,7 +163,6 @@ public class TerrainGenerator : Pathfinder
         
         CreateFrontier(CurrentTile.TilePosition,GridTiles);
         List<Tile> Path =GetPath(PlayerBase,CurrentTile);
-        Debug.Log("neighbour path "+Path.Count);
         Paths.Add(Path);
         CollapsedTiles.Add(CurrentTile);
     }
@@ -250,7 +249,7 @@ public class TerrainGenerator : Pathfinder
                 Dictionary<EDirection, EdgeConstraint> PLayerTowerConstraints =
                                         new Dictionary<EDirection, EdgeConstraint>();
 
-                Tile ChosenPlacement = PossiblePlacements[UnityEngine.Random.Range(0, PossiblePlacements.Count)];
+                Tile ChosenPlacement = PossiblePlacements[UnityEngine.Random.Range(0, PossiblePlacements.Count-1)];
                 EDirection DirectionToRoad =
                     DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);
 
