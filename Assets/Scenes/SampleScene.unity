@@ -150,15 +150,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileParent: {fileID: 2017310060}
   TilePrefab: {fileID: 7154264584798805888, guid: 9c75aa550ac8b81458214f89178893c1, type: 3}
-  GridXRange: 0a00000014000000
-  GridYRange: 0a00000014000000
+  GridXRange: 1400000019000000
+  GridYRange: 1400000019000000
   PlayerTower: {fileID: 11400000, guid: a94baaab57fd0e144a32ee128756be48, type: 2}
+  PlayerTowerPrefab: {fileID: 3484643059719625383, guid: a3a053894233e194294c4a67fab53253, type: 3}
   EnemyTower: {fileID: 11400000, guid: f19a320346cd958489d73bc25e83a851, type: 2}
+  EnemyTowerPrefab: {fileID: 4280053920644269576, guid: b5f9ad5f27244634b9a7a826f9fc2613, type: 3}
   TransitionTileSet: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}
   PlayerDefenderSet: {fileID: 11400000, guid: 7543233505ba9234086ebf58646b4ef7, type: 2}
-  EnemyShrinesAmount: 2
+  PayerDefenderPrefab: {fileID: 4766318177313687345, guid: e588b0c82ab8ced47b9a54c1cb34fdc7, type: 3}
+  EnemyShrinesAmount: 3
   ShrineOffset: 5
   PlayerTowerDensity: 2
+  minimumTransitionDistanceFromTower: 2
+  SimilarPathsThreshold: 50
 --- !u!4 &176994259
 Transform:
   m_ObjectHideFlags: 0

@@ -12,12 +12,18 @@ public class TerrainGenerator : Pathfinder
     [SerializeField] private int[] GridXRange=new int[ArraySizes];
     [SerializeField] private int[] GridYRange = new int[ArraySizes];
     [SerializeField] private TileSet PlayerTower;
+    [SerializeField] private GameObject PlayerTowerPrefab;
     [SerializeField] private TileSet EnemyTower;
+    [SerializeField] private GameObject EnemyTowerPrefab;
     [SerializeField] private TileSet TransitionTileSet;
     [SerializeField] private TileSet PlayerDefenderSet;
+    [SerializeField] private GameObject PayerDefenderPrefab;
     [SerializeField] private int EnemyShrinesAmount;
     [SerializeField] private int ShrineOffset;
     [SerializeField] private int PlayerTowerDensity;
+    [SerializeField] private int minimumTransitionDistanceFromTower;
+    [SerializeField] [Range(0, 100)] private int SimilarPathsThreshold;
+    private List<Tile> EnemyShrines = new List<Tile>();
     private List<Tile> CollapsedTiles = new List<Tile>();
     private const int ArraySizes = 2;
     private int GridBreadth;
@@ -27,29 +33,40 @@ public class TerrainGenerator : Pathfinder
     private Tile PlayerBase;
     private List<List<Tile>> Paths = new List<List<Tile>>();
     private Dictionary<List<Tile>, Tile> TransitionTiles = new Dictionary<List<Tile>, Tile>();
-
+    
+    //idea for cleanup rework this script so that spawning a tile is a method that takes in what tile to spawn
+    
+    
     private void Start()
     {
+        //ClearGrid();
         InitialiseGrid();
         PlacePlayerTower();
+        
+
+        
         
         for(int i=0;i<EnemyShrinesAmount;i++)
             PlaceEnemyTower();
         
+        
         CreatePathways();
         PlaceAllyTowerSpots();
+              
         
         CurrentTile=ChooseLowestEntropyTile();
-        /*do
+        
+        do
         {
           BuildGrid();
           CurrentTile=ChooseLowestEntropyTile();
-        } while(CollapsedTiles.Count<GridTiles.Length);*/
+        } while(CollapsedTiles.Count<GridTiles.Length);
     }
     
 
     private void InitialiseGrid()//creates the grid and populates it with prefab instances
     {
+        
         GridBreadth = UnityEngine.Random.Range(GridXRange[0], GridXRange[1]);
         GridHeight = UnityEngine.Random.Range(GridYRange[0], GridYRange[1]);
         GridTiles = new Tile[GridBreadth, GridHeight];
@@ -68,12 +85,38 @@ public class TerrainGenerator : Pathfinder
         }
     }
 
+    private void ClearGrid()
+    {
+       Tile[] createdTiles= TileParent.GetComponentsInChildren<Tile>();
+
+       foreach (Tile createdTile in createdTiles)
+       {
+           Destroy(createdTile.gameObject);
+       }
+       
+       EnemyShrines.Clear();
+       CollapsedTiles.Clear();
+       Paths.Clear();
+       TransitionTiles.Clear();
+    }
+
     private void PlacePlayerTower()
     {
         int RandomX = UnityEngine.Random.Range(0, GridBreadth-1);
         int RandomY = UnityEngine.Random.Range(0, GridHeight-1);
+        
+        Destroy(GridTiles[RandomX,RandomY].gameObject);
+        Vector3 PlacementPosition = new Vector3(RandomX, 0, RandomY);
+        GameObject SpawnedObject =Instantiate(PlayerTowerPrefab, PlacementPosition, quaternion.identity);
+        SpawnedObject.transform.SetParent(TileParent.transform);
+        Tile SpawnedTile;
+        SpawnedObject.TryGetComponent(out SpawnedTile);
+        GridTiles[RandomX, RandomY] = SpawnedTile;
+        
+        
         CurrentTile = GridTiles[RandomX,RandomY];
         CurrentTile.Collapse(PlayerTower);
+        CurrentTile.InitialiseTile();
         PlayerBase = CurrentTile;
         PropogateCollapse(CurrentTile);
         CollapsedTiles.Add(CurrentTile);
@@ -82,13 +125,14 @@ public class TerrainGenerator : Pathfinder
 
     private void PlaceEnemyTower()
     {
+        
         int RandomX;
         int RandomY;
 
         int enemyTowerXOffset;
         int playerTowerXOffset;
         
-        do
+        do// while the point chosen is too close to player reroll
         {
             RandomX = UnityEngine.Random.Range(0, GridBreadth);
             RandomY = UnityEngine.Random.Range(0, GridHeight);
@@ -100,14 +144,48 @@ public class TerrainGenerator : Pathfinder
         
         
         
+        Destroy(GridTiles[RandomX,RandomY].gameObject);
+        Vector3 PlacementPosition = new Vector3(RandomX, 0, RandomY);
+        GameObject SpawnedObject =Instantiate(EnemyTowerPrefab, PlacementPosition, quaternion.identity);
+        SpawnedObject.transform.SetParent(TileParent.transform);
+        Tile SpawnedTile;
+        SpawnedObject.TryGetComponent(out SpawnedTile);
+        GridTiles[RandomX, RandomY] = SpawnedTile;
+        
+        
         CurrentTile = GridTiles[RandomX, RandomY];
         CurrentTile.Collapse(EnemyTower);
+        CurrentTile.InitialiseTile();
+        EnemyShrines.Add(CurrentTile);
         PropogateCollapse(CurrentTile);
+
+        
+        
         CreateFrontier(CurrentTile.TilePosition,GridTiles);
         List<Tile> Path =GetPath(PlayerBase,CurrentTile);
+        Debug.Log("neighbour path "+Path.Count);
         Paths.Add(Path);
         CollapsedTiles.Add(CurrentTile);
     }
+
+    private bool ValidateGrid()
+    {
+        Dictionary<Vector2,Tile> UniqueTiles = new Dictionary<Vector2, Tile>();
+        
+        foreach (Tile collapse in CollapsedTiles)
+        {
+            UniqueTiles.TryAdd(collapse.TilePosition, collapse);
+        }
+        
+        if (UniqueTiles.Count / CollapsedTiles.Count * 100 < SimilarPathsThreshold)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
 
     private void CreatePathways()
     {
@@ -116,7 +194,8 @@ public class TerrainGenerator : Pathfinder
         {
 
             Tile TransitionTile;
-            TransitionTile = path[UnityEngine.Random.Range(0,path.Count/2)];//chat to erin about this
+            int testint = UnityEngine.Random.Range(minimumTransitionDistanceFromTower, path.Count / 2);
+            TransitionTile = path[testint];//chat to erin about this
             TransitionTile.Collapse(TransitionTileSet);
             TransitionTiles.Add(path,TransitionTile);
             
@@ -127,9 +206,11 @@ public class TerrainGenerator : Pathfinder
                 CollapsedTiles.Add(pathpoint);
             }
         }
+
+        
     }
 
-    private void PlaceAllyTowerSpots()//sort out last bit
+    private void PlaceAllyTowerSpots()
     {
         foreach (List<Tile> path in Paths)
         {
@@ -182,6 +263,16 @@ public class TerrainGenerator : Pathfinder
                 
                 
                 PlayerDefenderSet.InitialiseTileSet(PLayerTowerConstraints);
+                
+                Vector3 PlacementPosition = new Vector3(ChosenPlacement.TilePosition.x, 0,ChosenPlacement.TilePosition.y );
+                Destroy(ChosenPlacement.gameObject);
+                
+                GameObject SpawnedObject =Instantiate(PayerDefenderPrefab, PlacementPosition, quaternion.identity);
+                SpawnedObject.transform.SetParent(TileParent.transform);
+                Tile SpawnedTile;
+                SpawnedObject.TryGetComponent(out SpawnedTile);
+                ChosenPlacement = SpawnedTile;
+                GridTiles[ChosenPlacement.TilePosition.x, ChosenPlacement.TilePosition.y] = ChosenPlacement;
                 ChosenPlacement.Collapse(PlayerDefenderSet);
             }
             
