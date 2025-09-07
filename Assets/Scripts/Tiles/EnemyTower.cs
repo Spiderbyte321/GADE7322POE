@@ -1,16 +1,43 @@
+using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 public class EnemyTower : Tile
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private int EnemySpawnDelay=2;
+    [SerializeField] private GameObject[] EnemyTypes;
+    private List<Tile> ConnectedPath = new List<Tile>();
+    
+    
     void Start()
     {
-        
+        foreach (Tile tile in TerrainGenerator.Instance.EnemyPaths[this])
+        {
+            ConnectedPath.Add(tile);
+        }
+
+        ConnectedPath.Reverse();
+        StartWave();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartWave()//use an event to trigger this
     {
-        
+        StartCoroutine(SpawnEnemy());
+    }
+
+    private IEnumerator SpawnEnemy()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(EnemySpawnDelay);
+
+            Vector3 SpawnPosition = ConnectedPath[1].transform.position;
+            SpawnPosition.y = 1;
+            Instantiate(EnemyTypes[Random.Range(0, EnemyTypes.Length)], SpawnPosition,
+                quaternion.identity);
+        }
     }
 }

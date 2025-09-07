@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Unity.Mathematics;
 using Random = System.Random;
@@ -23,7 +24,6 @@ public class TerrainGenerator : Pathfinder
     [SerializeField] private int PlayerTowerDensity;
     [SerializeField] private int minimumTransitionDistanceFromTower;
     [SerializeField] [Range(0, 100)] private int SimilarPathsThreshold;
-    private List<Tile> EnemyShrines = new List<Tile>();
     private List<Tile> CollapsedTiles = new List<Tile>();
     private const int ArraySizes = 2;
     private int GridBreadth;
@@ -33,12 +33,27 @@ public class TerrainGenerator : Pathfinder
     private Tile PlayerBase;
     private List<List<Tile>> Paths = new List<List<Tile>>();
     private Dictionary<List<Tile>, Tile> TransitionTiles = new Dictionary<List<Tile>, Tile>();
+    private Dictionary<Tile, List<Tile>> enemyPaths = new Dictionary<Tile, List<Tile>>();
+
+
+    public IReadOnlyDictionary<Tile, List<Tile>> EnemyPaths => enemyPaths;
+    public static TerrainGenerator Instance;
     
     //idea for cleanup rework this script so that spawning a tile is a method that takes in what tile to spawn
     
     
     private void Start()
     {
+        if (Instance is null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance);
+        }
+        
+        
         //ClearGrid();
         InitialiseGrid();
         PlacePlayerTower();
@@ -94,7 +109,6 @@ public class TerrainGenerator : Pathfinder
            Destroy(createdTile.gameObject);
        }
        
-       EnemyShrines.Clear();
        CollapsedTiles.Clear();
        Paths.Clear();
        TransitionTiles.Clear();
@@ -156,14 +170,11 @@ public class TerrainGenerator : Pathfinder
         CurrentTile = GridTiles[RandomX, RandomY];
         CurrentTile.Collapse(EnemyTower);
         CurrentTile.InitialiseTile();
-        EnemyShrines.Add(CurrentTile);
         PropogateCollapse(CurrentTile);
-
-        
-        
         CreateFrontier(CurrentTile.TilePosition,GridTiles);
         List<Tile> Path =GetPath(PlayerBase,CurrentTile);
         Paths.Add(Path);
+        enemyPaths.Add(CurrentTile,Path);
         CollapsedTiles.Add(CurrentTile);
     }
 
