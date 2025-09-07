@@ -1,6 +1,6 @@
+using UnityEngine;
 
-//rework to be SOLID compliant
-public class PlayerTower : Tile//Handles the logic for the player
+public class PlayerTower : Tile//class to specify player tile for map generation uses everything from base class
 {
     
 }

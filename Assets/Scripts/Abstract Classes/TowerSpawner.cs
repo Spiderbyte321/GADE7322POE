@@ -8,7 +8,6 @@ public abstract class TowerSpawner : MonoBehaviour
 
     public virtual void Spawn(Vector3 SpawnPoint)
     {
-        Debug.Log("Spawning");
         Instantiate(TowerToSpawn, SpawnPoint, quaternion.identity);
     }
     

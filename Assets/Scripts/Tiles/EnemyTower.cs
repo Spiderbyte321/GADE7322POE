@@ -20,6 +20,7 @@ public class EnemyTower : Tile
         }
 
         ConnectedPath.Reverse();
+        ConnectedPath.RemoveAt(0);
         StartWave();
     }
 
@@ -34,10 +35,14 @@ public class EnemyTower : Tile
         {
             yield return new WaitForSeconds(EnemySpawnDelay);
 
-            Vector3 SpawnPosition = ConnectedPath[1].transform.position;
+            Vector3 SpawnPosition = ConnectedPath[0].transform.position;
             SpawnPosition.y = 1;
-            Instantiate(EnemyTypes[Random.Range(0, EnemyTypes.Length)], SpawnPosition,
+            GameObject SpawnedObject =Instantiate(EnemyTypes[Random.Range(0, EnemyTypes.Length)], SpawnPosition,
                 quaternion.identity);
+            EnemyBase SpawnedEnemy;
+            if(SpawnedObject.TryGetComponent(out SpawnedEnemy))
+                SpawnedEnemy.InitialiseEnemy(ConnectedPath);
+
         }
     }
 }

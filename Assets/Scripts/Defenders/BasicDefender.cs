@@ -6,67 +6,33 @@ using Unity.VisualScripting;
 
 public class BasicDefender : TowerBase//actual tower that will do attacking logic
 {
-    [SerializeField]private int maxhealth;
-    [SerializeField] private int targetMax;
-    [SerializeField] private int AttackSpeed;
-
-    private EnemyBase CurrentTarget;
-    private int currenthealth;
-
-    private Queue<EnemyBase> Targets = new Queue<EnemyBase>();
-
-    public int MaxHealth => maxhealth;
-    public int CurrentHealth => currenthealth;
-
-
-    public void TakeDamage(int ADamage)
+    protected override void OnTriggerEnter(Collider other)
     {
-        currenthealth -= ADamage;
-        if(currenthealth<0)
-            Destroy(gameObject);
-            
-    }
-    //store an array of enemies and attack them in order
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        currenthealth = maxhealth;
-    }
+        base.OnTriggerEnter(other);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        EnemyBase FoundEnemy = null;
+
+
+        if (Targets.Count == 0)
+        {
+            Targets.Enqueue(FoundEnemy);
+            StartCoroutine(KillEnemies());
+        }
         
-        if(!other.TryGetComponent(out FoundEnemy ))
-            return;
-
-
-        if (Targets.Count < targetMax)
+        if(Targets.Count < targetMax&&Targets.Count!=0)
         {
             Targets.Enqueue(FoundEnemy);
         }
-        else
-        {
-            //implement enemy walking away requirements
-        }
-
-        if(Targets.Count > 0)
-        {
-            StartCoroutine(AttackEnemy());
-        }
-        
     }
 
-    private IEnumerator AttackEnemy()
+
+    private IEnumerator KillEnemies()
     {
-       while(Targets.Count>0)
-       { 
-           CurrentTarget = Targets.Dequeue();
+        while(Targets.Count>0)
+        { 
+            CurrentTarget = Targets.Dequeue();
            
-           //attack current target
-         yield return new WaitForSeconds(AttackSpeed);
-       }
+            CurrentTarget.TakeDamage(AttackDamage);
+            yield return new WaitForSeconds(AttackSpeed);
+        }
     }
 }

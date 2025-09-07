@@ -103,6 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a62462ff3b9314888e7157f77ce6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhealth: 0
+  targetMax: 0
+  AttackSpeed: 0
 --- !u!65 &330753138553592619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,7 +121,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

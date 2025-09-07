@@ -10,9 +10,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log(Physics.Raycast(ray, out Hit));
-            
-            
             HandleMouseClick();
         }
     }
@@ -20,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private void HandleMouseClick()
     {
         Iinteractable ClickedObject;
-        Debug.Log(Hit.collider);
         if(Hit.collider.TryGetComponent<Iinteractable>(out ClickedObject)) 
             ClickedObject.Interact();
     }
