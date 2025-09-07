@@ -31,8 +31,11 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
         { 
             CurrentTarget = Targets.Dequeue();
            
-            CurrentTarget.TakeDamage(AttackDamage);
-            yield return new WaitForSeconds(AttackSpeed);
+            CurrentTarget.TakeDamage(AttackDamage,this);
+
+            float SecondsToWait = AttackSpeed / 60;
+            float RoundedSeconds = RoundToTwoDecimalPLaces(SecondsToWait);
+            yield return new WaitForSeconds(RoundedSeconds);
         }
     }
 }

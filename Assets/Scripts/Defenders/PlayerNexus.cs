@@ -1,15 +1,14 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerNexus : TowerBase//attacking logic for player tower
 {
     protected override void OnTriggerEnter(Collider other)
     {
-
         if(!other.TryGetComponent(out FoundEnemy))
             return;
         
-        Targets.Enqueue(FoundEnemy);
 
         if(Targets.Count > 0)
         {
@@ -24,13 +23,21 @@ public class PlayerNexus : TowerBase//attacking logic for player tower
     }
     
 
-
     private IEnumerator KillEnemies()
     {
-        while (Targets.Count>0)
+        CurrentTarget = Targets.Dequeue();
+        while(CurrentTarget.CurrentHealth>0||Targets.Count>0)
         {
-            yield return new WaitForSeconds(AttackSpeed);
-            CurrentTarget.TakeDamage(AttackDamage);
+            
+            if(CurrentTarget.CurrentHealth <= 0)
+                CurrentTarget = Targets.Dequeue();
+            
+            
+            CurrentTarget.TakeDamage(AttackDamage,this);
+
+            float RoundedSeconds = RoundToTwoDecimalPLaces(AttackSpeed / 60);
+            
+             yield return new WaitForSeconds(RoundedSeconds);
         }  
     }
 }

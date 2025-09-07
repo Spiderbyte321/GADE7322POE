@@ -35,8 +35,7 @@ public abstract class TowerBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        
-        
+        Debug.Log("entered parent");
         if(!other.TryGetComponent(out FoundEnemy ))
             return;
 
@@ -47,5 +46,12 @@ public abstract class TowerBase : MonoBehaviour
         }
        
         
+    }
+
+    protected float RoundToTwoDecimalPLaces(float AFloat)
+    {
+        float SecondsToWait = AFloat/ 60;
+        float RoundedSeconds = Mathf.Round(SecondsToWait * 100);
+       return RoundedSeconds /=100;
     }
 }

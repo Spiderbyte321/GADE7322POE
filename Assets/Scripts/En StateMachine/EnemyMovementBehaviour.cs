@@ -37,9 +37,13 @@ public class EnemyMovementBehaviour : EnemyBehaviour
         }
     }
 
-    public override Queue<Tile> EnemyExit()
+    public override void EnemyExit()
     {
-        throw new System.NotImplementedException();
+    }
+
+    public override Queue<Tile> GetRemainingPath()
+    {
+        return PathToFollow;
     }
 
 

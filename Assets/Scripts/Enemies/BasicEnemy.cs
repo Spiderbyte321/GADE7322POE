@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BasicEnemy : EnemyBase
 {
-    
-    
     private Queue<Tile> PathOrder = new Queue<Tile>();
 
     private EnemyBehaviour EnemyBehaviour;
@@ -32,21 +30,28 @@ public class BasicEnemy : EnemyBase
         EnemyBehaviour.EnemyUpdate();
     }
 
-    public override void TakeDamage(int ADamage)
+    public override void TakeDamage(int ADamage,TowerBase ATarget)
     {
-        base.TakeDamage(ADamage);
+        base.TakeDamage(ADamage,ATarget);
 
-        Queue<Tile> RemainingPath = EnemyBehaviour.EnemyExit();
-        PathOrder.Clear();
+        Queue<Tile> RemainingPath = new Queue<Tile>();
+        
+        if(EnemyBehaviour is EnemyMovementBehaviour) 
+           RemainingPath = EnemyBehaviour.GetRemainingPath();
+        
+        
         int TotalTiles = RemainingPath.Count;
-
-        for (int i = 0; i <= TotalTiles; i++)
+        
+        if(PathOrder.Count!=0)
+            PathOrder.Clear();
+        
+        for(int i = 0; i < TotalTiles; i++)
         {
             PathOrder.Enqueue(RemainingPath.Dequeue());
         }
-
-        EnemyBehaviour = new EnemyAttackingBehaviour();
-        EnemyBehaviour.EnemyStart();
         
+
+        EnemyBehaviour = new EnemyAttackingBehaviour(Target,AttackDamage,AttackSpeed);
+        EnemyBehaviour.EnemyStart();
     }
 }

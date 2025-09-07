@@ -8,8 +8,17 @@ public abstract class EnemyBehaviour
 
     public abstract void EnemyUpdate();
 
-    public virtual Queue<Tile> EnemyExit()
+    public abstract void EnemyExit();
+
+    public virtual Queue<Tile> GetRemainingPath()
     {
-        throw new Exception("Trying to exit wrong object");
+        throw new NotImplementedException();
+    }
+    
+    protected float RoundToTwoDecimalPLaces(float AFloat)
+    {
+        float SecondsToWait = AFloat / 60;
+        float RoundedSeconds = Mathf.Round(SecondsToWait * 100);
+        return RoundedSeconds /=100;
     }
 }

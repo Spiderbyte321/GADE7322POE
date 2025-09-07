@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ public class EnemyTower : Tile
 {
     [SerializeField] private int EnemySpawnDelay=2;
     [SerializeField] private GameObject[] EnemyTypes;
+    [SerializeField] private int[] AttackSpeedRange;
+    [SerializeField] private int[] AttackDamageRange;
     private List<Tile> ConnectedPath = new List<Tile>();
     
     
@@ -40,9 +43,31 @@ public class EnemyTower : Tile
             GameObject SpawnedObject =Instantiate(EnemyTypes[Random.Range(0, EnemyTypes.Length)], SpawnPosition,
                 quaternion.identity);
             EnemyBase SpawnedEnemy;
-            if(SpawnedObject.TryGetComponent(out SpawnedEnemy))
-                SpawnedEnemy.InitialiseEnemy(ConnectedPath);
+            if(!SpawnedObject.TryGetComponent(out SpawnedEnemy))
+                throw new Exception("Invalid Spawn should've used factory pattern");
+
+            int SpawnedAttackSpeed = Random.Range(AttackSpeedRange[0], AttackSpeedRange[1]);
+            int SpawnedAttackDamage = Random.Range(AttackDamageRange[0], AttackDamageRange[1]);
+            SpawnedEnemy.InitialiseEnemy(ConnectedPath,SpawnedAttackSpeed,SpawnedAttackDamage); 
+               
 
         }
+    }
+    
+    
+    private void OnValidate()
+    {
+        if(AttackSpeedRange.Length != 2)
+        {
+            Array.Resize(ref AttackSpeedRange,2);
+            Debug.Log("Resized AttackSpeedRange to "+2);
+        }
+
+        if (AttackDamageRange.Length != 2)
+        {
+            Array.Resize(ref AttackDamageRange,2);
+            Debug.Log("Resized AttackDamageRange to "+2);
+        }
+        
     }
 }
