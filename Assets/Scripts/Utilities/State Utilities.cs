@@ -15,7 +15,8 @@ public class StateUtilities : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(Instance);
+            Instance = this;
         }
     }
 

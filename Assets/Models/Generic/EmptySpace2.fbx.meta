@@ -3,7 +3,27 @@ guid: a3040e3abee7c7d48af942e70eb91fc6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlankSpaceSpikes
+    second: {fileID: 2100000, guid: 0d169c0a33cdcb743beec3c584d61c8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 5a1ad92dbc3fb1942a4c9a690752ab1b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: 4fb19f8e38196ac41aedfd3971283e07, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: blankspace2SpikesColor
+    second: {fileID: 2800000, guid: 70c5a482e5b1edd4b8716df99771fd9a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

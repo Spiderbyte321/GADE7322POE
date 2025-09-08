@@ -8,19 +8,29 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup WinScreen;
     [SerializeField] private CanvasGroup LooseScreen;
     [SerializeField] private CanvasGroup MainPLayerUI;
+    [SerializeField] private TextMeshProUGUI TimerTextBox;
 
 
     private void OnEnable()
     {
         GameManager.OnPLayerUIAction += UpdateMoneyText;
         GameManager.OnGameOver += ShowGameOverScreen;
+        GameManager.OnUpdateTimer += UpdateTimerUI;
     }
 
     private void OnDisable()
     {
         GameManager.OnPLayerUIAction -= UpdateMoneyText;
         GameManager.OnGameOver -= ShowGameOverScreen;
+        GameManager.OnUpdateTimer -= UpdateTimerUI;
     }
+
+    private void Awake()
+    {
+        Debug.Log("ran");
+        MoneyTextBox.text = 0.ToString();
+    }
+    
 
 
     private void UpdateMoneyText()
@@ -35,7 +45,7 @@ public class UIManager : MonoBehaviour
         MainPLayerUI.interactable = false;
         MainPLayerUI.blocksRaycasts = false;
         
-        if (isWon)
+        if(isWon)
         {
             WinScreen.alpha = 1;
             WinScreen.interactable = true;
@@ -48,6 +58,11 @@ public class UIManager : MonoBehaviour
             LooseScreen.blocksRaycasts = true;
         }
         
+    }
+
+    private void UpdateTimerUI()
+    {
+        TimerTextBox.text = GameManager.Instance.CurrentTime+" / "+GameManager.Instance.TimerLimit;
     }
 
 

@@ -7,8 +7,7 @@ public abstract class EnemyBehaviour
     public abstract void EnemyStart();
 
     public abstract void EnemyUpdate();
-
-    public abstract void EnemyExit();
+    
 
     public virtual Queue<Tile> GetRemainingPath()
     {

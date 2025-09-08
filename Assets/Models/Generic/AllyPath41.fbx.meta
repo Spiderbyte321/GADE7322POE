@@ -3,7 +3,27 @@ guid: c4fcee65017c9c94e97988b2573b25f9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 0d8012b57d5dcb6488443bf464a7dce4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RiverColor
+    second: {fileID: 2100000, guid: c444baccf2519a841b95c0a3146f867b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AllyRiverColor
+    second: {fileID: 2800000, guid: 13b08ac76bc9dfe4ba67100ed86ac19f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: f4ac775c6847a5946bd18b8e448d9c8a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

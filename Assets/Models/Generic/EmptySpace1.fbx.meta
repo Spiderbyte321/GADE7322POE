@@ -3,7 +3,17 @@ guid: ee5b4e2807b965e43a0cae618b969b73
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 0938f6f375d821b4d83199c698edefde, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: b1a9a3354eb7c6442a86c66b4b78a240, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

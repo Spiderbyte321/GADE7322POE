@@ -3,7 +3,37 @@ guid: cd9ffc11a27c6284893a938e78a3972a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AllyShrineMiddle
+    second: {fileID: 2100000, guid: ff76efde438ea0b4c8cb8012e113a423, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AllyShrineRings
+    second: {fileID: 2100000, guid: a0e85dee0e3e5e744a1ef86ae26f81c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 3903a45204a28504c80274a5cae22aff, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AllyShrineMiddleColor
+    second: {fileID: 2800000, guid: f399df7789168f7429579d149e944b96, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AllyShrineRingsColor
+    second: {fileID: 2800000, guid: 194c9a4a30179794db40b7312976682a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: f754338efa87c9540bd6cb6b478c3472, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

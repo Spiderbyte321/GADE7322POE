@@ -41,9 +41,7 @@ public class EnemyMovementBehaviour : EnemyBehaviour
         }
     }
 
-    public override void EnemyExit()
-    {
-    }
+    
 
     public override Queue<Tile> GetRemainingPath()
     {

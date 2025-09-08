@@ -3,7 +3,37 @@ guid: 2a683c01f3d89b7499db9f6c7407f23d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EnemyShrineBody
+    second: {fileID: 2100000, guid: feae4956e5c85164490c69d92ff5608f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EnemyShrineSpikes
+    second: {fileID: 2100000, guid: f1c77dfa950fd754389f1989b873e175, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: ecd4d260995d51846965d86ff825e215, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: EnemyShrineBodyColor
+    second: {fileID: 2800000, guid: 584d14b8e518c9d41b74173201f677ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: EnemyShrineSpikesColor
+    second: {fileID: 2800000, guid: 0bf14c6da11b1324d9a6807a32a242ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: c5710224e2d239e4ebbe48d547fd8432, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

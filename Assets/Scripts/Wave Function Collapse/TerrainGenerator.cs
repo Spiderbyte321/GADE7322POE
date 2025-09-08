@@ -40,9 +40,9 @@ public class TerrainGenerator : Pathfinder
     public static TerrainGenerator Instance;
     
     //idea for cleanup rework this script so that spawning a tile is a method that takes in what tile to spawn
-    
-    
-    private void Start()
+
+
+    private void Awake()
     {
         if (Instance is null)
         {
@@ -51,7 +51,12 @@ public class TerrainGenerator : Pathfinder
         else
         {
             Destroy(Instance);
+            Instance = this;
         }
+    }
+
+    private void Start()
+    {
         
         
         //ClearGrid();
@@ -173,6 +178,16 @@ public class TerrainGenerator : Pathfinder
         PropogateCollapse(CurrentTile);
         CreateFrontier(CurrentTile.TilePosition,GridTiles);
         List<Tile> Path =GetPath(PlayerBase,CurrentTile);
+
+
+        foreach (Tile tileToMove in Path)//fix this later
+        {
+            Vector3 MoveVector = tileToMove.transform.position;
+            MoveVector.y -= 0.15f;
+
+            tileToMove.transform.position = MoveVector;
+        }
+        
         Paths.Add(Path);
         enemyPaths.Add(CurrentTile,Path);
         CollapsedTiles.Add(CurrentTile);

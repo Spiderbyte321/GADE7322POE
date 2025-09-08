@@ -3,7 +3,17 @@ guid: 5d6d868b869a0c8458da7984798040fa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: 1adbc2c2dc4cd904fad34509e1515dfe, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TowerPlacerInsidesColor
+    second: {fileID: 2800000, guid: 255f8b1ea0f42c54b881a2c127b9c707, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
