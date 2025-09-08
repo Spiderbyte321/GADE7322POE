@@ -14,11 +14,15 @@ public class EnemyMovementBehaviour : EnemyBehaviour
     
     public override void EnemyStart()
     {
-        TargetTile = PathToFollow.Dequeue();
+        if(PathToFollow.Count>0) 
+            TargetTile = PathToFollow.Dequeue();
     }
 
     public override void EnemyUpdate()
     {
+        if(TargetTile == null)
+            return;
+        
         Vector3 TargetVector = new Vector3(TargetTile.transform.position.x, 1, TargetTile.transform.position.z);
         
         Vector3 MoveVector = Vector3.Lerp(EnemyObject.transform.position, TargetVector, T);
@@ -50,11 +54,16 @@ public class EnemyMovementBehaviour : EnemyBehaviour
     public EnemyMovementBehaviour(Queue<Tile> APathToFollow,GameObject AEnemyObject)
     {
         int OriginalLength = APathToFollow.Count;
+        
         for(int i = 0;i<OriginalLength;i++)
         {
             PathToFollow.Enqueue(APathToFollow.Dequeue());
         }
 
-        EnemyObject = AEnemyObject;
+        if(AEnemyObject is not null)
+        {
+           EnemyObject = AEnemyObject; 
+        }
+            
     }
 }

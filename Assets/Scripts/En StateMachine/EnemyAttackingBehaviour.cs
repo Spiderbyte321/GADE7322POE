@@ -8,6 +8,7 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
     private int AttackSpeed;
     private int AttackDamage;
     private TowerBase Target;
+    private bool routineFinished;
     public override void EnemyStart()
     {
         StateUtilities.Instance.StartCoroutine(KillTower());
@@ -20,7 +21,9 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
 
     public override void EnemyExit()
     {
+        
     }
+    
 
     public EnemyAttackingBehaviour(TowerBase ATarget,int AAttackDamage,int AAttackSpeed)
     {
@@ -32,12 +35,19 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
 
     private IEnumerator KillTower()
     { 
-        Debug.Log("trying to kill a tower");
         while(true)
         {
-          Target.TakeDamage(AttackDamage);
-          float TimeToWait = RoundToTwoDecimalPLaces(AttackSpeed / 60);
-          yield return new WaitForSeconds(TimeToWait);
+            if(Target == null)
+            { 
+                break;
+            }
+                
+            
+            Target.TakeDamage(AttackDamage); 
+            //float TimeToWait = RoundToTwoDecimalPLaces(AttackSpeed / 60); 
+            yield return new WaitForSeconds(AttackSpeed);
+            
         }
+        
     }
 }

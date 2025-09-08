@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 public abstract class EnemyBase : MonoBehaviour
@@ -12,6 +13,14 @@ public abstract class EnemyBase : MonoBehaviour
     public int CurrentHealth => currentHealth;
     
     protected List<Tile> PathToFollow = new List<Tile>();
+
+
+    private void OnEnable()
+    {
+        TowerBase.OnTowerDied += TowerDied;
+    }
+
+
     public void InitialiseEnemy(List<Tile> APathToFollow,int AAttackSpeed,int AAttackDamage)
     {
         foreach (Tile tile in APathToFollow)
@@ -36,5 +45,13 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         Target = ATarget;
+    }
+
+
+
+
+    protected virtual void TowerDied(TowerBase DeadTower)
+    {
+        throw new NotImplementedException();
     }
 }

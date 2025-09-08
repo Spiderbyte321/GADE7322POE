@@ -9,10 +9,10 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        
 
-
-
-        if (Targets.Count == 0)
+        
+        if(Targets.Count == 0&&FoundEnemy is not null)
         {
             Targets.Enqueue(FoundEnemy);
             StartCoroutine(KillEnemies());
@@ -33,9 +33,9 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
            
             CurrentTarget.TakeDamage(AttackDamage,this);
 
-            float SecondsToWait = AttackSpeed / 60;
-            float RoundedSeconds = RoundToTwoDecimalPLaces(SecondsToWait);
-            yield return new WaitForSeconds(RoundedSeconds);
+            //float SecondsToWait = AttackSpeed / 60;
+            //float RoundedSeconds = RoundToTwoDecimalPLaces(SecondsToWait); calling way too much fix it
+            yield return new WaitForSeconds(AttackSpeed);
         }
     }
 }

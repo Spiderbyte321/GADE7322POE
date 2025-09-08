@@ -26,7 +26,7 @@ public class BasicEnemy : EnemyBase
     }
 
     private void Update()
-    { 
+    {
         EnemyBehaviour.EnemyUpdate();
     }
 
@@ -35,9 +35,11 @@ public class BasicEnemy : EnemyBase
         base.TakeDamage(ADamage,ATarget);
 
         Queue<Tile> RemainingPath = new Queue<Tile>();
+
+        if(EnemyBehaviour is EnemyMovementBehaviour)
+             RemainingPath = EnemyBehaviour.GetRemainingPath();
         
-        if(EnemyBehaviour is EnemyMovementBehaviour) 
-           RemainingPath = EnemyBehaviour.GetRemainingPath();
+          
         
         
         int TotalTiles = RemainingPath.Count;
@@ -53,5 +55,17 @@ public class BasicEnemy : EnemyBase
 
         EnemyBehaviour = new EnemyAttackingBehaviour(Target,AttackDamage,AttackSpeed);
         EnemyBehaviour.EnemyStart();
+    }
+
+
+    protected override void TowerDied(TowerBase DeadTower)
+    {
+        if(DeadTower is PlayerNexus)
+            return;
+        if(Target == DeadTower)
+        {
+            EnemyBehaviour = new EnemyMovementBehaviour(PathOrder, gameObject);
+            EnemyBehaviour.EnemyStart();
+        }
     }
 }

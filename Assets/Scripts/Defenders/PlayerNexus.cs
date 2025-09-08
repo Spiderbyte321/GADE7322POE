@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerNexus : TowerBase//attacking logic for player tower
 {
+    
     protected override void OnTriggerEnter(Collider other)
     {
         if(!other.TryGetComponent(out FoundEnemy))
@@ -22,6 +23,7 @@ public class PlayerNexus : TowerBase//attacking logic for player tower
         
     }
     
+
 
     private IEnumerator KillEnemies()
     {
