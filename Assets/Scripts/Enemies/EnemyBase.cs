@@ -7,6 +7,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField]protected int maxHealth = 150;
     [SerializeField]protected int AttackDamage;
     [SerializeField]protected int AttackSpeed;
+    [SerializeField] private HealthBarController healthbar;
     protected TowerBase Target;
     protected int currentHealth;
     protected EnemyBehaviour Behaviour;
@@ -36,6 +37,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         AttackSpeed = AAttackSpeed;
         AttackDamage = AAttackDamage;
+        healthbar.InitialiseHealthBar(maxHealth);
         StartEnemy();
     }
 
@@ -44,6 +46,7 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int ADamage,TowerBase ATarget)
     {
         currentHealth -= ADamage;
+        healthbar.SetHealth(currentHealth);
 
         if(currentHealth<=0)
         {
