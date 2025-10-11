@@ -2,5 +2,6 @@ using UnityEngine;
 
 public enum ETowerType
 {
-    basic
+    basic,
+    speed
 }

@@ -3,12 +3,13 @@ using UnityEngine;
 using System.Collections.Generic;
 public abstract class EnemyBase : MonoBehaviour
 {
+    
+    [SerializeField]protected int maxHealth = 150;
+    [SerializeField]protected int AttackDamage;
+    [SerializeField]protected int AttackSpeed;
     protected TowerBase Target;
-    protected int maxHealth = 150;
     protected int currentHealth;
     protected EnemyBehaviour Behaviour;
-    protected int AttackDamage;
-    protected int AttackSpeed;
 
     public int CurrentHealth => currentHealth;
     
@@ -18,6 +19,11 @@ public abstract class EnemyBase : MonoBehaviour
     private void OnEnable()
     {
         TowerBase.OnTowerDied += TowerDied;
+    }
+
+    private void OnDisable()
+    {
+        TowerBase.OnTowerDied -= TowerDied;
     }
 
 

@@ -8,12 +8,17 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private int BasicTowerCost = 5;
+    [SerializeField] private int SpeedTowerCost = 6;
 
     private ETowerType ChosenType = ETowerType.basic;
     
     private RaycastHit Hit = new RaycastHit();
 
     private Dictionary<ETowerType, int> TowerCosts = new Dictionary<ETowerType, int>();
+
+    public delegate void ChoseTowerTypeAction(ETowerType chosentower);
+
+    public static event ChoseTowerTypeAction OnTowerTypeChosen;
     
 
     private void Start()
@@ -24,6 +29,9 @@ public class PlayerController : MonoBehaviour
             {
                 case ETowerType.basic:
                     TowerCosts.Add(towerType,BasicTowerCost);
+                    break;
+                case ETowerType.speed:
+                    TowerCosts.Add(towerType,SpeedTowerCost);
                     break;
             }
         }
@@ -56,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetChosenType(string AChosentType)
     {
+        Debug.Log("Chosen Type Selected");
         AChosentType = AChosentType.ToLower();
         ETowerType Tower = ETowerType.basic;
 
@@ -64,9 +73,14 @@ public class PlayerController : MonoBehaviour
             case "basic":
                 Tower = ETowerType.basic;
                 break;
+            case "speed":
+                Tower = ETowerType.speed;
+                break;
         }
 
 
         ChosenType = Tower;
+        
+        OnTowerTypeChosen?.Invoke(ChosenType);
     }
 }

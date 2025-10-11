@@ -11,6 +11,16 @@ public class DefenderTower : Tile,Iinteractable
     private TowerSpawner ActiveSpawner = null;
 
 
+    private void OnEnable()
+    {
+        PlayerController.OnTowerTypeChosen += SetActiveTower;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnTowerTypeChosen -= SetActiveTower;
+    }
+
     private void Start()
     {
         for (int i = 0; i < InputTowerFactories.Length; i++)

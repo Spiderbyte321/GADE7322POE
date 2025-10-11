@@ -31,10 +31,12 @@ public class EnemyTower : Tile
     {
         StartCoroutine(SpawnEnemy());
     }
-
+    
+    
+    //Rework this to spawn untill the list of enemies is empty rather than forever
     private IEnumerator SpawnEnemy()
     {
-        while (true)
+        while(true)
         {
             yield return new WaitForSeconds(EnemySpawnDelay);
 
@@ -49,8 +51,6 @@ public class EnemyTower : Tile
             int SpawnedAttackSpeed = Random.Range(AttackSpeedRange[0], AttackSpeedRange[1]);
             int SpawnedAttackDamage = Random.Range(AttackDamageRange[0], AttackDamageRange[1]);
             SpawnedEnemy.InitialiseEnemy(ConnectedPath,SpawnedAttackSpeed,SpawnedAttackDamage); 
-               
-
         }
     }
     

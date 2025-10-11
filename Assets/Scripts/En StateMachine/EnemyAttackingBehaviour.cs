@@ -11,7 +11,10 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
     private bool routineFinished;
     public override void EnemyStart()
     {
-            StateUtilities.Instance.StartCoroutine(KillTower());
+        if(AttackDamage==0||AttackSpeed==0)
+            return;
+        
+        StateUtilities.Instance.StartCoroutine(KillTower());
     }
 
     public override void EnemyUpdate()
