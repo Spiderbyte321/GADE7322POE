@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6137641713540350516}
   - component: {fileID: 2921925719517829116}
   - component: {fileID: 4910851743704814582}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TestFatty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   maxHealth: 300
   AttackDamage: 0
   AttackSpeed: 0
+  healthbar: {fileID: 0}
 --- !u!54 &4910851743704814582
 Rigidbody:
   m_ObjectHideFlags: 0

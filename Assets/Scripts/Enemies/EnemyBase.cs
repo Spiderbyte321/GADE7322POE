@@ -56,6 +56,17 @@ public abstract class EnemyBase : MonoBehaviour
         Target = ATarget;
     }
 
+    public void Blast(int ADamage)
+    {
+        currentHealth -= ADamage;
+        healthbar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
 
 
