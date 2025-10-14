@@ -36,13 +36,13 @@ public class EnemyTower : Tile
     //Rework this to spawn untill the list of enemies is empty rather than forever
     private IEnumerator SpawnEnemy()
     {
-        while(true)
+        while(WaveManager.instance.CurrentWaveCount>0)
         {
             yield return new WaitForSeconds(EnemySpawnDelay);
 
             Vector3 SpawnPosition = ConnectedPath[0].transform.position;
             SpawnPosition.y = 1;
-            GameObject SpawnedObject =Instantiate(EnemyTypes[Random.Range(0, EnemyTypes.Length)], SpawnPosition,
+            GameObject SpawnedObject =Instantiate(WaveManager.instance.TakeEnemyFromWave(), SpawnPosition,
                 quaternion.identity);
             EnemyBase SpawnedEnemy;
             if(!SpawnedObject.TryGetComponent(out SpawnedEnemy))

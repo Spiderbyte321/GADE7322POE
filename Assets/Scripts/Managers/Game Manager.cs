@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void EnemyDied()
     {
-        if(DeadEnemyCount != WaveManager.instance.CurrentWaveCount) 
+        if(DeadEnemyCount != WaveManager.instance.MaxWaveCount) 
             return;
         
         DeadEnemyCount = 0;

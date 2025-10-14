@@ -13,14 +13,16 @@ public class WaveManager : MonoBehaviour
     private List<float> normalisedThresholds = new List<float>();
     private Dictionary<float, GameObject> EnemyThresholds = new Dictionary<float, GameObject>();
     private List<GameObject> waveToSpawn = new List<GameObject>();
-    private float graphOffset;
+    private float GraphOffset=0;
     
     private int waveCount = 0;
 
     private float DifficultyThreshold;
     private float waveTotalThreshold=0;
 
-    public int CurrentWaveCount => waveToSpawn.Count;
+    public int MaxWaveCount => waveToSpawn.Count;
+
+    public int CurrentWaveCount => EnemiesToGive.Count;
 
     public static WaveManager instance;
 
@@ -61,7 +63,7 @@ public class WaveManager : MonoBehaviour
             EnemyThresholds.Add(normalisedThresholds[i],EnemyObjects[i]);
         }
 
-        graphOffset = 0.5f;
+        GraphOffset = 0.5f;
         
         CreateWave();
     }
@@ -71,20 +73,26 @@ public class WaveManager : MonoBehaviour
         while (waveTotalThreshold < DifficultyThreshold)
         {
 
-            float GivenThreshold = Mathf.PerlinNoise1D(graphOffset);
+            float GivenThreshold = Mathf.PerlinNoise1D(GraphOffset);
 
-            graphOffset += GivenThreshold;
+            GraphOffset += GivenThreshold;
 
-            float randomiser = Random.Range(GivenThreshold - 2 * GivenThreshold, GivenThreshold);
+            float randomiser = Random.Range(-0.1f,0.1f);
 
-            GivenThreshold += randomiser / GivenThreshold;
+            GivenThreshold += randomiser;
 
             float chosenThreshold = normalisedThresholds[0];
             for (int i = 0; i < normalisedThresholds.Count; i++)
             {
-                if (normalisedThresholds[i] < GivenThreshold && normalisedThresholds[i + 1] > GivenThreshold)
+                if(normalisedThresholds[i] < GivenThreshold && normalisedThresholds[i + 1] > GivenThreshold)
                 {
                     chosenThreshold = normalisedThresholds[i];
+                }
+
+                if(GivenThreshold > 1)
+                {
+                    chosenThreshold = normalisedThresholds[^1];
+                    break;
                 }
             }
 
@@ -92,7 +100,7 @@ public class WaveManager : MonoBehaviour
             waveTotalThreshold += chosenThreshold;
 
 
-            foreach (GameObject enemy in waveToSpawn)
+            foreach(GameObject enemy in waveToSpawn)
             {
                 EnemiesToGive.Enqueue(enemy);
             }
