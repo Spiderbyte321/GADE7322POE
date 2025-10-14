@@ -16,6 +16,10 @@ public abstract class EnemyBase : MonoBehaviour
     
     protected List<Tile> PathToFollow = new List<Tile>();
 
+    public delegate void EnemyDiedAction();
+
+    public static event EnemyDiedAction OnEnemyDied;
+
 
     private void OnEnable()
     {
@@ -25,6 +29,11 @@ public abstract class EnemyBase : MonoBehaviour
     private void OnDisable()
     {
         TowerBase.OnTowerDied -= TowerDied;
+    }
+
+    private void OnDestroy()
+    {
+        OnEnemyDied?.Invoke();
     }
 
 
@@ -78,7 +87,7 @@ public abstract class EnemyBase : MonoBehaviour
             Destroy(gameObject);
         }
         
-        Debug.Log("Blasted");
+        Debug.Log($"Blasted: {this}");
     }
 
 

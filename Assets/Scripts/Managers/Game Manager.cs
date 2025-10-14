@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private bool gameOver;
 
+    private int DeadEnemyCount = 0;
+
     public int CurrentTime => currentTime;
 
     public int TimerLimit => timerLimit;
@@ -33,17 +35,32 @@ public class GameManager : MonoBehaviour
     public delegate void UpdateTimerUI();
 
     public static event UpdateTimerUI OnUpdateTimer;
+
+    public delegate void WaveBeatenAction();
+
+    public static event WaveBeatenAction OnWaveBeaten;
     
 
 
     private void OnEnable()
     {
         TowerBase.OnTowerDied += GameOver;
+        EnemyBase.OnEnemyDied += EnemyDied;
     }
 
     private void OnDisable()
     {
         TowerBase.OnTowerDied -= GameOver;
+        EnemyBase.OnEnemyDied += EnemyDied;
+    }
+
+    private void EnemyDied()
+    {
+        if(DeadEnemyCount != WaveManager.instance.CurrentWaveCount) 
+            return;
+        
+        DeadEnemyCount = 0;
+        StartCoroutine(NextWave());
     }
 
 
@@ -125,6 +142,13 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1);
         }
+    }
+
+    private IEnumerator NextWave()
+    {
+        yield return new WaitForSeconds(3);
+        
+        OnWaveBeaten?.Invoke();
     }
     
     

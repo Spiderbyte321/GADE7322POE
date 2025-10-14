@@ -43,16 +43,13 @@ public class ArtilleryDefender : TowerBase
 
     private IEnumerator LaunchShell()
     {
-        Debug.Log("Launching");
         int charge = 0;
 
         while (Targets.Count > 0)
         {
-            Debug.Log("Firing");
             yield return new WaitForSeconds(AttackSpeed); 
             
             charge+= MaxCharge-AttackSpeed/MaxCharge;
-            Debug.Log(charge);
             if (charge < MaxCharge) 
                 continue;
 
