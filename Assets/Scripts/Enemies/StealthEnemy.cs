@@ -44,5 +44,9 @@ public class StealthEnemy : EnemyBase
         behaviour = new EnemyAttackingBehaviour(ATarget, AttackDamage, AttackSpeed);
         behaviour.EnemyStart();
     }
-    
+
+    protected override void TowerDied(TowerBase DeadTower)
+    {
+        Destroy(gameObject);
+    }
 }

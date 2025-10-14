@@ -37,6 +37,18 @@ public abstract class EnemyBase : MonoBehaviour
 
         AttackSpeed += AAttackSpeed;
         AttackDamage += AAttackDamage;
+
+        if (AttackSpeed <= 0)//Safety Nets
+        {
+            AttackSpeed = 10;
+            
+        }
+
+        if (AttackDamage <= 0)
+        {
+            AttackDamage = 1;
+        }
+        
         healthbar.InitialiseHealthBar(maxHealth);
         StartEnemy();
     }
@@ -65,13 +77,12 @@ public abstract class EnemyBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        Debug.Log("Blasted");
     }
 
 
 
 
-    protected virtual void TowerDied(TowerBase DeadTower)
-    {
-        throw new NotImplementedException();
-    }
+    protected abstract void TowerDied(TowerBase DeadTower);
 }

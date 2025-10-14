@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f17547c31104514fa749d3db986f021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerToSpawn: {fileID: 4484954227431149051, guid: c8b1c89dddf85da489581998c9d77041, type: 3}
+  TowerToSpawn: {fileID: 1825146063402929738, guid: 122e5c513a5939448a0c217cfc9f9717, type: 3}
 --- !u!114 &3358330156220612987
 MonoBehaviour:
   m_ObjectHideFlags: 0

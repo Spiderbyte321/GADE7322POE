@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,30 +11,53 @@ public class ArtilleryDefender : TowerBase
     
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
         
+        base.OnTriggerEnter(other);
         Targets.Add(FoundEnemy);
-
+        
+        Debug.Log("colliding with Target");
         if(Targets.Count == 1)
         {
+            Debug.Log($"{Targets.Count}");
             StartCoroutine(LaunchShell());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other is null)
+            return;
+        
+        
+        if (!other.TryGetComponent(out EnemyBase LeftEnemy))
+        {
+            return;
+        }
+
+        if (Targets.Remove(LeftEnemy))
+        {
+            Debug.Log("removed Target");
         }
     }
 
 
     private IEnumerator LaunchShell()
     {
+        Debug.Log("Launching");
         int charge = 0;
 
         while (Targets.Count > 0)
         {
-            yield return new WaitForSeconds(1); 
+            Debug.Log("Firing");
+            yield return new WaitForSeconds(AttackSpeed); 
             
-            charge++;
-
+            charge+= MaxCharge-AttackSpeed/MaxCharge;
+            Debug.Log(charge);
             if (charge < MaxCharge) 
                 continue;
-            
+
+            if (Targets[0] is null)
+                continue;
             
             Collider[] targetsInRange = Physics.OverlapSphere(Targets[0].transform.position, 1.5f,3);
 

@@ -105,8 +105,8 @@ MonoBehaviour:
   EnemySpawnDelay: 2
   EnemyTypes:
   - {fileID: 1162699131537054470, guid: 7c3c217d35abb6b4da93efdef7cf3eb7, type: 3}
-  AttackSpeedRange: 0200000004000000
-  AttackDamageRange: 050000000a000000
+  AttackSpeedRange: ffffffff02000000
+  AttackDamageRange: feffffff04000000
 --- !u!65 &3188866817866516002
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -45,6 +45,7 @@ public abstract class TowerBase : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         
+        
         if (other is null)
             return;
         
