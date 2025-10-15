@@ -48,10 +48,7 @@ public abstract class TowerBase : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         
-        Debug.Log(other);
-        
-        
-        if (other is null)
+        if(other is null)
             return;
         
         
@@ -60,9 +57,6 @@ public abstract class TowerBase : MonoBehaviour
             return;
         }
         
-        Debug.Log(FoundEnemy);
-            
-
 
         if(Targets.Count < targetMax)
         {

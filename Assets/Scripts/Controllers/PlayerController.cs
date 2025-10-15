@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int BasicTowerCost = 5;
     [SerializeField] private int SpeedTowerCost = 6;
+    [SerializeField] private int ArtilerryTowerCost = 4;
 
     private ETowerType ChosenType = ETowerType.basic;
     
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
                 case ETowerType.speed:
                     TowerCosts.Add(towerType,SpeedTowerCost);
                     break;
+                case ETowerType.artilery:
+                    TowerCosts.Add(towerType,ArtilerryTowerCost);
+                    break;
             }
         }
     }
@@ -50,16 +54,21 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseClick()
     {
-        if (GameManager.Instance.PlayerCurrency < TowerCosts[ChosenType]) //change to say not enough
+        if(GameManager.Instance.PlayerCurrency < TowerCosts[ChosenType]) //change to say not enough
         { 
             return;
         }
            
+       
         
         Iinteractable ClickedObject;
+
+        if (!Hit.collider.TryGetComponent(out ClickedObject)) 
+            return;
         
-        if(Hit.collider.TryGetComponent<Iinteractable>(out ClickedObject)) 
-            ClickedObject.Interact();
+        ClickedObject.Interact();
+        GameManager.Instance.DecreaseCurrency(TowerCosts[ChosenType]);
+
     }
 
     public void SetChosenType(string AChosentType)

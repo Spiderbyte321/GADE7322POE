@@ -9,12 +9,11 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        
-
-        
-        if(Targets.Count == 0&&FoundEnemy is not null)
+        Debug.Log("colliding");
+        Debug.Log(Targets.Count);
+        if(Targets.Count == 1&&FoundEnemy is not null)
         {
-            Targets.Enqueue(FoundEnemy);
+            //Targets.Enqueue(FoundEnemy);
             StartCoroutine(KillEnemies());
         }
         
@@ -29,6 +28,7 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
     {
         while(Targets.Count>0)
         { 
+            Debug.Log("attacking");
             CurrentTarget = Targets.Dequeue();
            
             CurrentTarget.TakeDamage(AttackDamage,this);

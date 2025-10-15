@@ -10,18 +10,37 @@ public class ArtilleryDefender : TowerBase
     [SerializeField] private HealthBarController ChargeBar;
     private List<EnemyBase> Targets = new List<EnemyBase>();
 
+
+    private void OnEnable()
+    {
+        EnemyBase.OnEnemyDied += ReactToDeadEnemy;
+    }
+
+    private void OnDisable()
+    {
+        EnemyBase.OnEnemyDied -= ReactToDeadEnemy;
+    }
+
+    private void ReactToDeadEnemy(EnemyBase deadEnemy)
+    {
+        if(Targets.Contains(deadEnemy)) 
+            Targets.Remove(deadEnemy);
+    }
+
     protected override void Start()
     {
         base.Start();
         ChargeBar.InitialiseHealthBar(MaxCharge);
         ChargeBar.SetHealth(0);
     }
+    
 
     protected override void OnTriggerEnter(Collider other)
     {
+       
         
         base.OnTriggerEnter(other);
-
+         Debug.Log("collided");
         if(FoundEnemy is not null)
         {
             Debug.Log("Adding");
@@ -29,7 +48,6 @@ public class ArtilleryDefender : TowerBase
         }
         
         
-        //Debug.Log("colliding with Target");
         if(Targets.Count == 1)
         {
             //Debug.Log($"{Targets.Count}");
@@ -37,7 +55,7 @@ public class ArtilleryDefender : TowerBase
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
     {
         if (other is null)
             return;
@@ -52,14 +70,16 @@ public class ArtilleryDefender : TowerBase
         {
             Debug.Log("removed Target");
         }
-    }
+    }*/
+    
+    //ok no there needs to be a better way
+    // how about instead we get the transfrom and use the position rather than getting it from the enemy
 
 
     private IEnumerator LaunchShell()
     {
         int charge = 0;
-        int currentTarget = 0;
-
+        EnemyBase positiontarget = null;
         while (Targets.Count > 0)
         {
             yield return new WaitForSeconds(AttackSpeed);
@@ -69,28 +89,42 @@ public class ArtilleryDefender : TowerBase
             if (charge < MaxCharge) 
                 continue;
             
-            if (Targets.Count==0)
+
+            if(Targets.Count == 0)
             {
-                Debug.Log("No enemies to attack");
-                StopCoroutine(LaunchShell());
+              continue;  
+            }
+
+            foreach (EnemyBase target in Targets)
+            {
+                if (target is not null)
+                    positiontarget = target;
             }
             
-            {
-                if (Targets[currentTarget] is null)
-                {
-                    currentTarget += 1;
-                }
-            }
-                
-            Debug.Log("getting targets");
-            Collider[] targetsInRange = Physics.OverlapSphere(Targets[currentTarget].transform.position, 1.5f,3);
 
-            foreach (Collider target in targetsInRange)
+            Transform TargetPosition = positiontarget.transform;
+            
+            Collider[] targetsInRange = Physics.OverlapSphere(TargetPosition.position, 1.5f);
+            
+            if(targetsInRange.Length==0)
+                continue;
+            
+            foreach (Collider collider in targetsInRange)
             {
-                Debug.Log("Launching");
-                target.gameObject.TryGetComponent(out EnemyBase enemyToAttack);
-                    
-                enemyToAttack.Blast(AttackDamage);
+                EnemyBase enemyTarget;
+
+                if(collider is null)
+                {
+                    continue;
+                }
+                
+                if(!collider.gameObject.TryGetComponent(out enemyTarget))
+                {
+                    continue;
+                }
+                
+                enemyTarget.Blast(AttackDamage);
+                
             }
 
         }

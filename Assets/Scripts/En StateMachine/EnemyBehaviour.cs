@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBehaviour
+public abstract class EnemyBehaviour: MonoBehaviour
 {
     public abstract void EnemyStart();
 
     public abstract void EnemyUpdate();
+
+    public abstract void EnemyEnd();
+    
     
 
     public virtual Queue<Tile> GetRemainingPath()

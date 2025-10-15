@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         EnemyBase.OnEnemyDied += EnemyDied;
     }
 
-    private void EnemyDied()
+    private void EnemyDied(EnemyBase deadEnemy)
     {
         if(DeadEnemyCount != WaveManager.instance.MaxWaveCount) 
             return;
@@ -103,6 +103,12 @@ public class GameManager : MonoBehaviour
     public void InreaseIncomeAmount(int AAmount)
     {
         incomeAmount += AAmount;
+    }
+
+    public void DecreaseCurrency(int AAmount)
+    {
+        playerCurrency -= AAmount;
+        OnPLayerUIAction?.Invoke();
     }
     
 

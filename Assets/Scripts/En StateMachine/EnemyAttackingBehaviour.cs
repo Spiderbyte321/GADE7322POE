@@ -14,7 +14,7 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
         if(AttackDamage==0||AttackSpeed==0)
             return;
         
-        StateUtilities.Instance.StartCoroutine(KillTower());
+        StateUtilities.Instance.RunCoroutine(KillTower(),this);
     }
 
     public override void EnemyUpdate()
@@ -22,8 +22,12 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
         
     }
 
-   
-    
+    public override void EnemyEnd()
+    {
+        Debug.Log("Stopping routine");
+        StateUtilities.Instance.StopRoutine(this);
+    }
+
 
     public EnemyAttackingBehaviour(TowerBase ATarget,int AAttackDamage,int AAttackSpeed)
     {
@@ -48,6 +52,5 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
             yield return new WaitForSeconds(AttackSpeed);
             
         }
-        
     }
 }

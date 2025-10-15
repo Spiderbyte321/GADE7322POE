@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StateUtilities : MonoBehaviour
 {
     public static StateUtilities Instance;
 
+    private Dictionary<EnemyBehaviour, IEnumerator> RunningRoutines = new Dictionary<EnemyBehaviour, IEnumerator>();
 
     private void Start()
     {
@@ -22,20 +24,17 @@ public class StateUtilities : MonoBehaviour
 
 
 
-    public void RunCoroutine(IEnumerator ACoroutineToRun)
+    public void RunCoroutine(IEnumerator ACoroutineToRun,EnemyBehaviour origin)
     {
+        if(origin is null)
+            return;
+        
+        RunningRoutines.TryAdd(origin,ACoroutineToRun);   
         StartCoroutine(ACoroutineToRun);
     }
 
-    public void StopRoutine(IEnumerator ACoroutineToStop)
+    public void StopRoutine(EnemyBehaviour origin)
     {
-        StopCoroutine(ACoroutineToStop);
+        StopCoroutine(RunningRoutines[origin]);
     }
-
-    public void StopAllRoutines()
-    {
-        StopAllCoroutines();
-    }
-    
-    
 }

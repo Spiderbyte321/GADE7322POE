@@ -7,10 +7,13 @@ public class PlayerNexus : TowerBase//attacking logic for player tower
     
     protected override void OnTriggerEnter(Collider other)
     {
-        if(!other.TryGetComponent(out FoundEnemy))
-            return;
+        if (!other.TryGetComponent(out FoundEnemy))
+        {
+             return;
+        }
+           
         
-
+        
         if(Targets.Count > 0)
         {
           Targets.Enqueue(FoundEnemy);  

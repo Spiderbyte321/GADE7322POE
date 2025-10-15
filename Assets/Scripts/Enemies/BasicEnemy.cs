@@ -5,8 +5,6 @@ using UnityEngine;
 public class BasicEnemy : EnemyBase
 {
     private Queue<Tile> PathOrder = new Queue<Tile>();
-
-    private EnemyBehaviour EnemyBehaviour;
     
     protected override void StartEnemy()
     {
@@ -16,8 +14,8 @@ public class BasicEnemy : EnemyBase
         }
         
 
-        EnemyBehaviour = new EnemyMovementBehaviour(PathOrder,gameObject);
-        EnemyBehaviour.EnemyStart();
+        Behaviour = new EnemyMovementBehaviour(PathOrder,gameObject);
+        Behaviour.EnemyStart();
     }
 
     private void Start()
@@ -27,7 +25,7 @@ public class BasicEnemy : EnemyBase
 
     private void Update()
     {
-        EnemyBehaviour.EnemyUpdate();
+        Behaviour.EnemyUpdate();
     }
 
     public override void TakeDamage(int ADamage,TowerBase ATarget)
@@ -36,8 +34,8 @@ public class BasicEnemy : EnemyBase
 
         Queue<Tile> RemainingPath = new Queue<Tile>();
 
-        if(EnemyBehaviour is EnemyMovementBehaviour)
-             RemainingPath = EnemyBehaviour.GetRemainingPath();
+        if(Behaviour is EnemyMovementBehaviour)
+             RemainingPath = Behaviour.GetRemainingPath();
         
           
         
@@ -53,8 +51,8 @@ public class BasicEnemy : EnemyBase
         }
         
 
-        EnemyBehaviour = new EnemyAttackingBehaviour(Target,AttackDamage,AttackSpeed);
-        EnemyBehaviour.EnemyStart();
+        Behaviour = new EnemyAttackingBehaviour(Target,AttackDamage,AttackSpeed);
+        Behaviour.EnemyStart();
     }
 
 
@@ -64,8 +62,8 @@ public class BasicEnemy : EnemyBase
             return;
         if(Target == DeadTower)
         {
-            EnemyBehaviour = new EnemyMovementBehaviour(PathOrder, gameObject);
-            EnemyBehaviour.EnemyStart();
+            Behaviour = new EnemyMovementBehaviour(PathOrder, gameObject);
+            Behaviour.EnemyStart();
         }
     }
 }

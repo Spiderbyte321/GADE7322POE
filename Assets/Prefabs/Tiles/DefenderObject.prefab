@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8131451097899976810}
   - component: {fileID: -613406208868386588}
   - component: {fileID: 3358330156220612987}
+  - component: {fileID: 7386783907137044990}
   - component: {fileID: 340603235722937712}
   m_Layer: 0
   m_Name: DefenderObject
@@ -104,10 +105,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileInfo: []
   Default: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}
-  InputTowerTypes: 0000000001000000
+  InputTowerTypes: 000000000100000002000000
   InputTowerFactories:
   - {fileID: -613406208868386588}
   - {fileID: 3358330156220612987}
+  - {fileID: 7386783907137044990}
 --- !u!114 &-613406208868386588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f17547c31104514fa749d3db986f021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerToSpawn: {fileID: 1825146063402929738, guid: 122e5c513a5939448a0c217cfc9f9717, type: 3}
+  TowerToSpawn: {fileID: 4484954227431149051, guid: c8b1c89dddf85da489581998c9d77041, type: 3}
 --- !u!114 &3358330156220612987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerToSpawn: {fileID: 435320821378684312, guid: 6e5c7c592c78fdc48b42adebba1803bf, type: 3}
+--- !u!114 &7386783907137044990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766318177313687345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f17547c31104514fa749d3db986f021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerToSpawn: {fileID: 1825146063402929738, guid: 122e5c513a5939448a0c217cfc9f9717, type: 3}
 --- !u!65 &340603235722937712
 BoxCollider:
   m_ObjectHideFlags: 0

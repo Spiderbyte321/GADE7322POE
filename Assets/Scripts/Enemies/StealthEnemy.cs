@@ -5,11 +5,10 @@ using UnityEngine;
 public class StealthEnemy : EnemyBase
 {
     private Queue<Tile> Pathorder = new Queue<Tile>();
-    private EnemyBehaviour behaviour;
 
     private void Update()
     {
-        behaviour.EnemyUpdate();
+        Behaviour.EnemyUpdate();
     }
 
     protected override void StartEnemy()
@@ -22,14 +21,13 @@ public class StealthEnemy : EnemyBase
         }
 
 
-        behaviour = new EnemyMovementBehaviour(Pathorder, gameObject);
-        behaviour.EnemyStart();
+        Behaviour = new EnemyMovementBehaviour(Pathorder, gameObject);
+        Behaviour.EnemyStart();
     }
 
 
     public override void TakeDamage(int ADamage, TowerBase ATarget)
     {
-        Debug.Log("Attacking");
         currentHealth--;
         healthbar.SetHealth(currentHealth);
 
@@ -41,9 +39,8 @@ public class StealthEnemy : EnemyBase
         if(ATarget is not PlayerNexus) 
             return;
 
-        Debug.Log("attacking");
-        behaviour = new EnemyAttackingBehaviour(ATarget, AttackDamage, AttackSpeed);
-        behaviour.EnemyStart();
+        Behaviour = new EnemyAttackingBehaviour(ATarget, AttackDamage, AttackSpeed);
+        Behaviour.EnemyStart();
     }
 
     protected override void TowerDied(TowerBase DeadTower)
