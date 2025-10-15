@@ -9,6 +9,7 @@ public abstract class TowerBase : MonoBehaviour
     [SerializeField] protected int targetMax;
     [SerializeField] protected int AttackSpeed;
     [SerializeField] protected int AttackDamage;
+    [SerializeField] protected HealthBarController HealthBar;
     
     
 
@@ -31,19 +32,23 @@ public abstract class TowerBase : MonoBehaviour
     public virtual void TakeDamage(int ADamage)
     {
         currenthealth -= ADamage;
+        HealthBar.SetHealth(currenthealth);
         if(currenthealth<0)
             Destroy(gameObject);
             
     }
     
     
-    void Start()
+    protected virtual void Start()
     {
         currenthealth = maxhealth;
+        HealthBar.InitialiseHealthBar(currenthealth);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        
+        Debug.Log(other);
         
         
         if (other is null)
@@ -54,6 +59,8 @@ public abstract class TowerBase : MonoBehaviour
         {
             return;
         }
+        
+        Debug.Log(FoundEnemy);
             
 
 

@@ -29,6 +29,7 @@ public class StealthEnemy : EnemyBase
 
     public override void TakeDamage(int ADamage, TowerBase ATarget)
     {
+        Debug.Log("Attacking");
         currentHealth--;
         healthbar.SetHealth(currentHealth);
 
@@ -40,7 +41,7 @@ public class StealthEnemy : EnemyBase
         if(ATarget is not PlayerNexus) 
             return;
 
-
+        Debug.Log("attacking");
         behaviour = new EnemyAttackingBehaviour(ATarget, AttackDamage, AttackSpeed);
         behaviour.EnemyStart();
     }

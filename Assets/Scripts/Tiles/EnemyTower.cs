@@ -42,7 +42,11 @@ public class EnemyTower : Tile
 
             Vector3 SpawnPosition = ConnectedPath[0].transform.position;
             SpawnPosition.y = 1;
-            GameObject SpawnedObject =Instantiate(WaveManager.instance.TakeEnemyFromWave(), SpawnPosition,
+            GameObject EnemyToSpawn = WaveManager.instance.TakeEnemyFromWave();
+            if (EnemyToSpawn is null)
+                continue;
+            
+            GameObject SpawnedObject =Instantiate(EnemyToSpawn, SpawnPosition,
                 quaternion.identity);
             EnemyBase SpawnedEnemy;
             if(!SpawnedObject.TryGetComponent(out SpawnedEnemy))

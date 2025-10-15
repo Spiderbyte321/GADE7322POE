@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetChosenType(string AChosentType)
     {
-        Debug.Log("Chosen Type Selected");
         AChosentType = AChosentType.ToLower();
         ETowerType Tower = ETowerType.basic;
 
@@ -75,6 +74,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case "speed":
                 Tower = ETowerType.speed;
+                break;
+            case "artilery":
+                Tower = ETowerType.artilery;
                 break;
         }
 

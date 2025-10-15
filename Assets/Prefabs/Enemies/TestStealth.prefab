@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   AttackDamage: 1
-  AttackSpeed: 5
+  AttackSpeed: 2
   healthbar: {fileID: 8019798431636675294}
 --- !u!54 &8016132256600650394
 Rigidbody:
@@ -257,6 +257,10 @@ PrefabInstance:
     - target: {fileID: 6146368234528670340, guid: d4cfe81f9d5626447b7380684e288171, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423653272308645864, guid: d4cfe81f9d5626447b7380684e288171, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

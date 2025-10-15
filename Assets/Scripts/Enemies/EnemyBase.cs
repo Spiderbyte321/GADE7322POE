@@ -81,13 +81,14 @@ public abstract class EnemyBase : MonoBehaviour
     {
         currentHealth -= ADamage;
         healthbar.SetHealth(currentHealth);
-
-        if (currentHealth <= 0)
+        
+         Debug.Log($"Blasted: {this}");
+        if(currentHealth <= 0)
         {
             Destroy(gameObject);
         }
         
-        Debug.Log($"Blasted: {this}");
+       
     }
 
 
