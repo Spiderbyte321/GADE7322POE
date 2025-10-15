@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
     public delegate void WaveBeatenAction();
 
     public static event WaveBeatenAction OnWaveBeaten;
+
+    public delegate void StartNextWaveAction();
+
+    public static event StartNextWaveAction OnNextWaveStart;
     
 
 
@@ -56,9 +60,11 @@ public class GameManager : MonoBehaviour
 
     private void EnemyDied(EnemyBase deadEnemy)
     {
-        if(DeadEnemyCount != WaveManager.instance.MaxWaveCount) 
+        DeadEnemyCount++;
+        if(DeadEnemyCount < WaveManager.instance.MaxWaveCount) 
             return;
         
+        Debug.Log("starting next wave");
         DeadEnemyCount = 0;
         StartCoroutine(NextWave());
     }
@@ -78,6 +84,7 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(IncrementIncome());
         StartCoroutine(GameTimer());
+        StartCoroutine(NextWave());
     }
 
 
@@ -154,7 +161,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         
+        Debug.Log("start");
         OnWaveBeaten?.Invoke();
+        OnNextWaveStart?.Invoke();
     }
     
     

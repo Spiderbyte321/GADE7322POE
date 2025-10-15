@@ -7,7 +7,7 @@ public abstract class TowerBase : MonoBehaviour
     
     [SerializeField]protected int maxhealth;
     [SerializeField] protected int targetMax;
-    [SerializeField] protected int AttackSpeed;
+    [SerializeField] protected float AttackSpeed;
     [SerializeField] protected int AttackDamage;
     [SerializeField] protected HealthBarController HealthBar;
     
@@ -74,6 +74,7 @@ public abstract class TowerBase : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("Invoking");
         OnTowerDied?.Invoke(this);
     }
 }

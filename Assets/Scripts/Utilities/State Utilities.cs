@@ -29,7 +29,9 @@ public class StateUtilities : MonoBehaviour
         if(origin is null)
             return;
         
-        RunningRoutines.TryAdd(origin,ACoroutineToRun);   
+        //Debug.Log(origin);
+        
+        RunningRoutines.Add(origin,ACoroutineToRun);   
         StartCoroutine(ACoroutineToRun);
     }
 

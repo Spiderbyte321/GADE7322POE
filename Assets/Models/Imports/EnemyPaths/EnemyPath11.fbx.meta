@@ -14,6 +14,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Ground
     second: {fileID: 6795462705980167066, guid: cf7eb02eb57e28549bb7d8e9ac8d7638, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: EnemyRiverColor
+    second: {fileID: 2800000, guid: 2cac27b6143f35145af8e63cab64fa85, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: d64af633b31aeaf49a54c5459cced50e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

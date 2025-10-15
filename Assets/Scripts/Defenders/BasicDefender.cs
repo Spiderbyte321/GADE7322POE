@@ -9,11 +9,8 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        Debug.Log("colliding");
-        Debug.Log(Targets.Count);
         if(Targets.Count == 1&&FoundEnemy is not null)
         {
-            //Targets.Enqueue(FoundEnemy);
             StartCoroutine(KillEnemies());
         }
         
@@ -26,16 +23,19 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
 
     private IEnumerator KillEnemies()
     {
-        while(Targets.Count>0)
-        { 
-            Debug.Log("attacking");
-            CurrentTarget = Targets.Dequeue();
-           
+        CurrentTarget = Targets.Dequeue();
+        while(CurrentTarget.CurrentHealth>0||Targets.Count>0)
+        {
+            
+            if(CurrentTarget.CurrentHealth <= 0)
+                CurrentTarget = Targets.Dequeue();
+            
+            
             CurrentTarget.TakeDamage(AttackDamage,this);
 
-            //float SecondsToWait = AttackSpeed / 60;
-            //float RoundedSeconds = RoundToTwoDecimalPLaces(SecondsToWait); calling way too much fix it
+            //float RoundedSeconds = RoundToTwoDecimalPLaces(AttackSpeed / 60);
+            
             yield return new WaitForSeconds(AttackSpeed);
-        }
+        }  
     }
 }

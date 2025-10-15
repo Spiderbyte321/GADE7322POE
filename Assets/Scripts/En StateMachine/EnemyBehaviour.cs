@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBehaviour: MonoBehaviour
+public abstract class EnemyBehaviour
 {
     public abstract void EnemyStart();
 

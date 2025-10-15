@@ -43,12 +43,12 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: AllyHunterCloth
-    second: {fileID: 2800000, guid: d47a22b700c4354438768947edc1eb1a, type: 3}
+    second: {fileID: 2800000, guid: b4f47dadea0ec8c46800c9303647622e, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: AllyRiverColor
-    second: {fileID: 2800000, guid: ff9b69effa4edac4e82a54d108e813c7, type: 3}
+    second: {fileID: 2800000, guid: 700c3782af8c9bc449f6e5141b0f93e9, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

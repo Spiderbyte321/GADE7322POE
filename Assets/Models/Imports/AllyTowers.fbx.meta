@@ -9,6 +9,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: AllyTower
     second: {fileID: 2100000, guid: 41f932585b7d2e349b281960674ffa3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 0a6127cace490ed4b8f7f0c95393962e, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AllyTowerMiddleColor
+    second: {fileID: 2800000, guid: 700221a3e0aafe44888828f35ce638ca, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GroundColor
+    second: {fileID: 2800000, guid: 679ceb110a526c44493a227d4cf4c636, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -38,7 +38,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: AllyRiverColor
-    second: {fileID: 2800000, guid: ff45639edb8c84b4f88dbede32d7fce7, type: 3}
+    second: {fileID: 2800000, guid: c1443e4e6f69b7d40a990c2cdc8deb7e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

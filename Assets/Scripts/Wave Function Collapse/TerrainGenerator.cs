@@ -274,7 +274,7 @@ public class TerrainGenerator : Pathfinder
 
                 Dictionary<EDirection, EdgeConstraint> PLayerTowerConstraints =
                                         new Dictionary<EDirection, EdgeConstraint>();
-
+                //Index out of bounds here must fix
                 Tile ChosenPlacement = PossiblePlacements[UnityEngine.Random.Range(0, PossiblePlacements.Count-1)];
                 EDirection DirectionToRoad =
                     DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);

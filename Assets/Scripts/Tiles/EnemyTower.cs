@@ -13,8 +13,18 @@ public class EnemyTower : Tile
     [SerializeField] private int[] AttackSpeedRange;
     [SerializeField] private int[] AttackDamageRange;
     private List<Tile> ConnectedPath = new List<Tile>();
-    
-    
+
+    private void OnEnable()
+    {
+        GameManager.OnNextWaveStart += StartWave;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnNextWaveStart -= StartWave;
+    }
+
+
     void Start()
     {
         foreach (Tile tile in TerrainGenerator.Instance.EnemyPaths[this])

@@ -247,10 +247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcd39552eee04e40bd413e86a02e000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhealth: 100
+  maxhealth: 5000
   targetMax: 50
-  AttackSpeed: 5
-  AttackDamage: 15
+  AttackSpeed: 2
+  AttackDamage: 25
   HealthBar: {fileID: 4759738796909567753}
 --- !u!54 &2880310028930908897
 Rigidbody:

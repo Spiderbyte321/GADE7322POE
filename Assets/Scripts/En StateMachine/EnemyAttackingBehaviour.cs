@@ -24,7 +24,6 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
 
     public override void EnemyEnd()
     {
-        Debug.Log("Stopping routine");
         StateUtilities.Instance.StopRoutine(this);
     }
 

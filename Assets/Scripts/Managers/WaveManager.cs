@@ -39,6 +39,16 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.OnWaveBeaten += CreateWave;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnWaveBeaten -= CreateWave;
+    }
+
     void Start()
     {
         waveCount++;
@@ -61,15 +71,17 @@ public class WaveManager : MonoBehaviour
         for(int i=0;i<normalisedThresholds.Count;i++)//add them to  the dictionary
         {
             EnemyThresholds.Add(normalisedThresholds[i],EnemyObjects[i]);
+            Debug.Log(normalisedThresholds[i]);
         }
 
         GraphOffset = 0.5f;
-        
-        CreateWave();
     }
 
     private void CreateWave()
     {
+        waveTotalThreshold = 0;
+        DifficultyThreshold = 3 * waveCount;
+        Debug.Log("Creating next wave");
         while (waveTotalThreshold < DifficultyThreshold)
         {
 
@@ -77,7 +89,7 @@ public class WaveManager : MonoBehaviour
 
             GraphOffset += GivenThreshold;
 
-            float randomiser = Random.Range(-0.1f,0.1f);
+            float randomiser = Random.Range(-0.5f,0.6f);
 
             GivenThreshold += randomiser;
 
@@ -89,7 +101,7 @@ public class WaveManager : MonoBehaviour
                     chosenThreshold = normalisedThresholds[i];
                 }
 
-                if(GivenThreshold > 1)
+                if(GivenThreshold >= 1)
                 {
                     chosenThreshold = normalisedThresholds[^1];
                     break;
@@ -98,13 +110,13 @@ public class WaveManager : MonoBehaviour
 
             waveToSpawn.Add(EnemyThresholds[chosenThreshold]);
             waveTotalThreshold += chosenThreshold;
-
-
-            foreach(GameObject enemy in waveToSpawn)
-            {
-                EnemiesToGive.Enqueue(enemy);
-            }
         }
+        
+        foreach(GameObject enemy in waveToSpawn)
+        { 
+            EnemiesToGive.Enqueue(enemy);
+        }
+        
     }
 
     public GameObject TakeEnemyFromWave()
