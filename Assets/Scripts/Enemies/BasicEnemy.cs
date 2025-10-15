@@ -13,7 +13,7 @@ public class BasicEnemy : EnemyBase
             PathOrder.Enqueue(PathToFollow[i]);
         }
         
-
+        
         Behaviour = new EnemyMovementBehaviour(PathOrder,gameObject);
         Behaviour.EnemyStart();
     }
@@ -38,7 +38,7 @@ public class BasicEnemy : EnemyBase
              RemainingPath = Behaviour.GetRemainingPath();
         
           
-        
+        Debug.Log($"Remaining path:{RemainingPath.Count}");
         
         int TotalTiles = RemainingPath.Count;
         
@@ -58,10 +58,14 @@ public class BasicEnemy : EnemyBase
 
     protected override void TowerDied(TowerBase DeadTower)
     {
+        Debug.Log("resumin");
         if(DeadTower is PlayerNexus)
             return;
+        
         if(Target == DeadTower)
         {
+            Debug.Log("killed player");
+            Debug.Log(PathOrder.Count);
             Behaviour = new EnemyMovementBehaviour(PathOrder, gameObject);
             Behaviour.EnemyStart();
         }

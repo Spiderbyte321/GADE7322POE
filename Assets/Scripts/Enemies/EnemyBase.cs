@@ -5,13 +5,12 @@ using UnityEngine.InputSystem.OnScreen;
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    //From now on state machines stay as monobehaviours
     
     [SerializeField]protected int maxHealth = 150;
     [SerializeField]protected int AttackDamage;
     [SerializeField]protected int AttackSpeed;
     [SerializeField] protected HealthBarController healthbar;
-    [SerializeField] private EnemyBehaviour attackingBehaviour;
-    [SerializeField] private EnemyBehaviour walkingBehaviour;
     protected TowerBase Target;
     protected int currentHealth;
     protected EnemyBehaviour Behaviour;
@@ -92,8 +91,6 @@ public abstract class EnemyBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-       
     }
 
 

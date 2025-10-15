@@ -107,7 +107,7 @@ MonoBehaviour:
   maxhealth: 100
   targetMax: 5
   AttackSpeed: 2
-  AttackDamage: 5000
+  AttackDamage: 500
   HealthBar: {fileID: 4101782495676014406}
 --- !u!65 &330753138553592619
 BoxCollider:

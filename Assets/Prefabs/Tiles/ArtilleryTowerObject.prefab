@@ -217,7 +217,7 @@ MonoBehaviour:
   maxhealth: 30
   targetMax: 50
   AttackSpeed: 1
-  AttackDamage: 50
+  AttackDamage: 300
   HealthBar: {fileID: 539130273637013458}
   MaxCharge: 2
   ChargeBar: {fileID: 6692368393131575974}

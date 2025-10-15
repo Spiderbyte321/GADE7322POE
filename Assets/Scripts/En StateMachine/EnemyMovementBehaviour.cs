@@ -39,6 +39,7 @@ public class EnemyMovementBehaviour : EnemyBehaviour
             T = 0;
             TargetTile = PathToFollow.Dequeue();
         }
+        Debug.Log($"remaining path:{PathToFollow.Count} and enemy:{EnemyObject}");
     }
 
     public override void EnemyEnd()
@@ -55,6 +56,7 @@ public class EnemyMovementBehaviour : EnemyBehaviour
 
     public EnemyMovementBehaviour(Queue<Tile> APathToFollow,GameObject AEnemyObject)
     {
+        
         int OriginalLength = APathToFollow.Count;
         
         for(int i = 0;i<OriginalLength;i++)

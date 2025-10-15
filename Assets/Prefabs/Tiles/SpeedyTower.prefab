@@ -108,8 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhealth: 30
   targetMax: 10
-  AttackSpeed: 1
-  AttackDamage: 20
+  AttackSpeed: 0.2
+  AttackDamage: 50
   HealthBar: {fileID: 3061609759866980532}
 --- !u!65 &5048777342873642826
 BoxCollider:
