@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BerserkUpgrade
   m_EditorClassIdentifier: 
   maxHealthIncrease: 0
-  attackDamageIncrease: 0
-  attackSpeedIncrease: 0
+  attackDamageIncrease: 2
+  attackSpeedIncrease: 1
   currentHealthIncrease: 0
+  upgradeCost: 0

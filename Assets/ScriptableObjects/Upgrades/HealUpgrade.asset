@@ -15,4 +15,5 @@ MonoBehaviour:
   maxHealthIncrease: 0
   attackDamageIncrease: 0
   attackSpeedIncrease: 0
-  currentHealthIncrease: 0
+  currentHealthIncrease: 50
+  upgradeCost: 0

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthIncrease: 0
   attackDamageIncrease: 0
-  attackSpeedIncrease: 0
+  attackSpeedIncrease: 3
   currentHealthIncrease: 0
+  upgradeCost: 0

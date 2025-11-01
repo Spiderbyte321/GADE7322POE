@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 176994262}
   - component: {fileID: 176994263}
   - component: {fileID: 176994264}
+  - component: {fileID: 176994265}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -471,6 +472,7 @@ MonoBehaviour:
   BasicTowerCost: 5
   SpeedTowerCost: 6
   ArtilerryTowerCost: 4
+  UpgradeManager: {fileID: 0}
 --- !u!114 &176994261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +537,32 @@ MonoBehaviour:
   - {fileID: 1162699131537054470, guid: 7c3c217d35abb6b4da93efdef7cf3eb7, type: 3}
   - {fileID: 1293761412856438981, guid: 3f2b5f2d57d35a44d9662ee302a1971c, type: 3}
   - {fileID: 906627361629520724, guid: 7445a95e91f53fa4998e2f633efaffef, type: 3}
+--- !u!114 &176994265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176994257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c489789a840fe4e9d4393d5da128f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PossibleUpgrades:
+  - {fileID: 11400000, guid: 71afcb8ae0f22cc45beca9b4d06c61b8, type: 2}
+  - {fileID: 11400000, guid: c7968a68a5374e14e85a3cfde9d8906d, type: 2}
+  - {fileID: 11400000, guid: b5c6216574412fd46a7b641721320ef4, type: 2}
+  - {fileID: 11400000, guid: 4bf56f7949a26d941902f60c80755a36, type: 2}
+  - {fileID: 11400000, guid: d3f8fed48efb96e4391248a07fe9133c, type: 2}
+  - {fileID: 11400000, guid: 3163e7c0c8c9d8e45bc5b7cb7f4f07f0, type: 2}
+  UpgradeKeys:
+  - damage
+  - speed
+  - berserk
+  - heal
+  - maxhealth
+  - recover
 --- !u!1 &299038349
 GameObject:
   m_ObjectHideFlags: 0
