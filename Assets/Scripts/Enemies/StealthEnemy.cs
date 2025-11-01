@@ -21,7 +21,7 @@ public class StealthEnemy : EnemyBase
         }
 
 
-        Behaviour = new EnemyMovementBehaviour(Pathorder, gameObject);
+        Behaviour = movementBehaviour;
         Behaviour.EnemyStart();
     }
 
@@ -39,7 +39,7 @@ public class StealthEnemy : EnemyBase
         if(ATarget is not PlayerNexus) 
             return;
 
-        Behaviour = new EnemyAttackingBehaviour(ATarget, AttackDamage, AttackSpeed);
+        Behaviour = attackingBehaviour;
         Behaviour.EnemyStart();
     }
 

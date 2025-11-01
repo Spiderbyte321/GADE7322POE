@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBehaviour
+public abstract class EnemyBehaviour: MonoBehaviour
 {
     public abstract void EnemyStart();
 
@@ -16,6 +16,8 @@ public abstract class EnemyBehaviour
     {
         throw new NotImplementedException();
     }
+
+    public abstract void Retarget(TowerBase ATarget);
     
     protected float RoundToTwoDecimalPLaces(float AFloat)
     {

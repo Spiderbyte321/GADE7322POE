@@ -12,9 +12,9 @@ public class BasicEnemy : EnemyBase
         {
             PathOrder.Enqueue(PathToFollow[i]);
         }
-        
-        
-        Behaviour = new EnemyMovementBehaviour(PathOrder,gameObject);
+
+
+        Behaviour = movementBehaviour;
         Behaviour.EnemyStart();
     }
 
@@ -32,7 +32,7 @@ public class BasicEnemy : EnemyBase
     {
         base.TakeDamage(ADamage,ATarget);
 
-        Queue<Tile> RemainingPath = new Queue<Tile>();
+        /*Queue<Tile> RemainingPath = new Queue<Tile>();
 
         if(Behaviour is EnemyMovementBehaviour)
              RemainingPath = Behaviour.GetRemainingPath();
@@ -48,10 +48,11 @@ public class BasicEnemy : EnemyBase
         for(int i = 0; i < TotalTiles; i++)
         {
             PathOrder.Enqueue(RemainingPath.Dequeue());
-        }
-        
+        }*/
 
-        Behaviour = new EnemyAttackingBehaviour(Target,AttackDamage,AttackSpeed);
+
+        Behaviour = attackingBehaviour;
+        Behaviour.Retarget(Target);
         Behaviour.EnemyStart();
     }
 
@@ -66,7 +67,7 @@ public class BasicEnemy : EnemyBase
         {
             Debug.Log("killed player");
             Debug.Log(PathOrder.Count);
-            Behaviour = new EnemyMovementBehaviour(PathOrder, gameObject);
+            Behaviour = movementBehaviour;
             Behaviour.EnemyStart();
         }
     }

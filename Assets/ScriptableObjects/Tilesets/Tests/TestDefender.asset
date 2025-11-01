@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa0e18588244a159375512dcdf5927f, type: 3}
   m_Name: TestDefender
   m_EditorClassIdentifier: 
-  tileMeshObject: {fileID: 919132149155446097, guid: 5d6d868b869a0c8458da7984798040fa, type: 3}
+  tileMeshObject: {fileID: 919132149155446097, guid: 3ada54f228843c542a3b88319c962cf7, type: 3}
   topConstraint: {fileID: 0}
   rightConstraint: {fileID: 0}
   bottomConstraint: {fileID: 0}

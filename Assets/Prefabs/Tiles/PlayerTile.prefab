@@ -249,8 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhealth: 5000
   targetMax: 50
-  AttackSpeed: 2
-  AttackDamage: 25
+  AttackSpeed: 5
+  AttackDamage: 1
   HealthBar: {fileID: 4759738796909567753}
 --- !u!54 &2880310028930908897
 Rigidbody:

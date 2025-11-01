@@ -2,14 +2,16 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class TowerBase : MonoBehaviour
+public abstract class TowerBase : MonoBehaviour,IUpgradable
 {
     
-    [SerializeField]protected int maxhealth;
+    [SerializeField] protected int maxhealth;
     [SerializeField] protected int targetMax;
     [SerializeField] protected float AttackSpeed;
     [SerializeField] protected int AttackDamage;
     [SerializeField] protected HealthBarController HealthBar;
+    [SerializeField] private GameObject unupgradedMesh;
+    [SerializeField] private GameObject upgradedMesh;
     
     
 
@@ -65,6 +67,16 @@ public abstract class TowerBase : MonoBehaviour
         
     }
 
+    private void ApplyUpgrade(Upgrade AUpgrade)
+    {
+        maxhealth += AUpgrade.MaxHealthIncrease;
+        currenthealth += AUpgrade.CurrentHealthIncrease;
+        AttackDamage += AUpgrade.AttackDamageIncrease;
+        AttackSpeed += AUpgrade.AttackSpeedIncrease;
+        unupgradedMesh.SetActive(false);
+        upgradedMesh.SetActive(true);
+    }
+
     protected float RoundToTwoDecimalPLaces(float AFloat)
     {
         float SecondsToWait = AFloat/ 60;
@@ -74,7 +86,12 @@ public abstract class TowerBase : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("Invoking");
         OnTowerDied?.Invoke(this);
     }
+
+    public void Upgrade(Upgrade AUpgrade)
+    {
+        ApplyUpgrade(AUpgrade);
+    }
+    
 }

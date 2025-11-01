@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1001726282917897488}
   - component: {fileID: 2270788411517319309}
   - component: {fileID: 2819044578819459560}
+  - component: {fileID: 8977784660062037460}
+  - component: {fileID: -2376328335288649194}
   - component: {fileID: 2609438939551877697}
   m_Layer: 3
   m_Name: Test Enemy
@@ -130,6 +132,32 @@ MonoBehaviour:
   AttackDamage: 15
   AttackSpeed: 3
   healthbar: {fileID: 4729085549702746748}
+  movementBehaviour: {fileID: 8977784660062037460}
+  attackingBehaviour: {fileID: -2376328335288649194}
+--- !u!114 &8977784660062037460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162699131537054470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe25a11df820484a80328560d50c9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2376328335288649194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162699131537054470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6fe129a918fe644a5422972ec7743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &2609438939551877697
 Rigidbody:
   m_ObjectHideFlags: 0

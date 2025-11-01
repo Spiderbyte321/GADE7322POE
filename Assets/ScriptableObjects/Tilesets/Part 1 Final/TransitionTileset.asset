@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa0e18588244a159375512dcdf5927f, type: 3}
   m_Name: TransitionTileset
   m_EditorClassIdentifier: 
-  tileMeshObject: {fileID: 919132149155446097, guid: 01110b1c0053be24182bb51656b48719, type: 3}
+  tileMeshObject: {fileID: 919132149155446097, guid: 84ceb829b0372bb42aa417310f450bfe, type: 3}
   topConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
   rightConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
   bottomConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}

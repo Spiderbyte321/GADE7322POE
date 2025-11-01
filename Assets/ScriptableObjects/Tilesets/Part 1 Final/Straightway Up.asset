@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa0e18588244a159375512dcdf5927f, type: 3}
   m_Name: Straightway Up
   m_EditorClassIdentifier: 
-  tileMeshObject: {fileID: 919132149155446097, guid: 840b0be3c19206e45b012bd19cac5971, type: 3}
+  tileMeshObject: {fileID: 919132149155446097, guid: 37915a8b831247046a08a7aeb6648f13, type: 3}
   topConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}
   rightConstraint: {fileID: 11400000, guid: 76be1895d7d8c194d9b7e2c55fdfdf29, type: 2}
   bottomConstraint: {fileID: 11400000, guid: 72878773bbe534449aff1307bc3da6b5, type: 2}

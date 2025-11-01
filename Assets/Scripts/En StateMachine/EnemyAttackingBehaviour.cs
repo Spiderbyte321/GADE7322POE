@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's attacking
 {
+    //Find a way to get them the target when they get to it
+    
     private int AttackSpeed;
     private int AttackDamage;
     private TowerBase Target;
@@ -14,7 +16,12 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
         if(AttackDamage==0||AttackSpeed==0)
             return;
         
-        StateUtilities.Instance.RunCoroutine(KillTower(),this);
+        StartCoroutine(KillTower());
+    }
+
+    public override void Retarget(TowerBase ATarget)
+    {
+        Target = ATarget;
     }
 
     public override void EnemyUpdate()
@@ -24,13 +31,12 @@ public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's at
 
     public override void EnemyEnd()
     {
-        StateUtilities.Instance.StopRoutine(this);
+        StopCoroutine(KillTower());
     }
 
 
-    public EnemyAttackingBehaviour(TowerBase ATarget,int AAttackDamage,int AAttackSpeed)
+    public void InitialiseEnemyAttacking(int AAttackDamage,int AAttackSpeed)
     {
-        Target = ATarget;
         AttackDamage = AAttackDamage;
         AttackSpeed = AAttackSpeed;
     }

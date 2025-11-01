@@ -104,11 +104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a62462ff3b9314888e7157f77ce6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhealth: 100
+  maxhealth: 5
   targetMax: 5
   AttackSpeed: 2
   AttackDamage: 500
   HealthBar: {fileID: 4101782495676014406}
+  upgradeManager: {fileID: 0}
+  unupgradedMesh: {fileID: 0}
+  upgradedMesh: {fileID: 0}
 --- !u!65 &330753138553592619
 BoxCollider:
   m_ObjectHideFlags: 0

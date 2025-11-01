@@ -11,9 +11,12 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField]protected int AttackDamage;
     [SerializeField]protected int AttackSpeed;
     [SerializeField] protected HealthBarController healthbar;
+    [SerializeField] protected EnemyMovementBehaviour movementBehaviour;
+    [SerializeField] protected EnemyAttackingBehaviour attackingBehaviour;
     protected TowerBase Target;
     protected int currentHealth;
     protected EnemyBehaviour Behaviour;
+    
 
     public int CurrentHealth => currentHealth;
     
@@ -36,6 +39,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(GameManager.Instance is null)
+            return;
+        
         OnEnemyDied?.Invoke(this);
         Behaviour.EnemyEnd();
     }
@@ -43,10 +49,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     public void InitialiseEnemy(List<Tile> APathToFollow,int AAttackSpeed,int AAttackDamage)
     {
-        foreach (Tile tile in APathToFollow)
+        /*foreach (Tile tile in APathToFollow)
         {
             PathToFollow.Add(tile);
-        }
+        }*/
 
         AttackSpeed += AAttackSpeed;
         AttackDamage += AAttackDamage;
@@ -63,6 +69,16 @@ public abstract class EnemyBase : MonoBehaviour
         }
         
         healthbar.InitialiseHealthBar(maxHealth);
+
+        Queue<Tile> path = new Queue<Tile>();
+
+        foreach (Tile tilepath in APathToFollow)
+        {
+           path.Enqueue(tilepath); 
+        }
+        
+        movementBehaviour.InitialiseEnemyMovement(path);
+        attackingBehaviour.InitialiseEnemyAttacking(AttackDamage,AttackSpeed);
         StartEnemy();
     }
 

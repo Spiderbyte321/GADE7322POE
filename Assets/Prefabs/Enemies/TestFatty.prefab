@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1567937840314605302}
   - component: {fileID: 6137641713540350516}
   - component: {fileID: 2921925719517829116}
+  - component: {fileID: -8639217586139596594}
+  - component: {fileID: -2894489495475802269}
   - component: {fileID: 4910851743704814582}
   m_Layer: 3
   m_Name: TestFatty
@@ -128,6 +130,32 @@ MonoBehaviour:
   AttackDamage: 2
   AttackSpeed: 5
   healthbar: {fileID: 6372761346371223207}
+  movementBehaviour: {fileID: -8639217586139596594}
+  attackingBehaviour: {fileID: -2894489495475802269}
+--- !u!114 &-8639217586139596594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293761412856438981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe25a11df820484a80328560d50c9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2894489495475802269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293761412856438981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6fe129a918fe644a5422972ec7743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &4910851743704814582
 Rigidbody:
   m_ObjectHideFlags: 0

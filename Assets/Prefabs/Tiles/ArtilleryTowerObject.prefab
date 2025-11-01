@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 9167589533771248744}
   - component: {fileID: 274369508511162898}
   - component: {fileID: 8473814634869741100}
+  - component: {fileID: 373114975093368023}
   - component: {fileID: 6223176326288052238}
   - component: {fileID: 2480858308760776363}
   m_Layer: 0
@@ -219,8 +220,35 @@ MonoBehaviour:
   AttackSpeed: 1
   AttackDamage: 300
   HealthBar: {fileID: 539130273637013458}
+  upgradeManager: {fileID: 373114975093368023}
   MaxCharge: 2
   ChargeBar: {fileID: 6692368393131575974}
+--- !u!114 &373114975093368023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825146063402929738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c489789a840fe4e9d4393d5da128f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PossibleUpgrades:
+  - {fileID: 11400000, guid: 71afcb8ae0f22cc45beca9b4d06c61b8, type: 2}
+  - {fileID: 11400000, guid: c7968a68a5374e14e85a3cfde9d8906d, type: 2}
+  - {fileID: 11400000, guid: b5c6216574412fd46a7b641721320ef4, type: 2}
+  - {fileID: 11400000, guid: 4bf56f7949a26d941902f60c80755a36, type: 2}
+  - {fileID: 11400000, guid: d3f8fed48efb96e4391248a07fe9133c, type: 2}
+  - {fileID: 11400000, guid: 3163e7c0c8c9d8e45bc5b7cb7f4f07f0, type: 2}
+  UpgradeKeys:
+  - damage
+  - speed
+  - berserk
+  - heal
+  - maxhealth
+  - recover
 --- !u!65 &6223176326288052238
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyMovementBehaviour : EnemyBehaviour
 {
-
-    private GameObject EnemyObject;
+    
     private Queue<Tile> PathToFollow = new Queue<Tile>();
     private Tile TargetTile;
     private float Movespeed = 0.5f;
@@ -25,26 +24,29 @@ public class EnemyMovementBehaviour : EnemyBehaviour
         
         Vector3 TargetVector = new Vector3(TargetTile.transform.position.x, 1, TargetTile.transform.position.z);
         
-        Vector3 MoveVector = Vector3.Lerp(EnemyObject.transform.position, TargetVector, T);
+        Vector3 MoveVector = Vector3.Lerp(gameObject.transform.position, TargetVector, T);
         
          T += Movespeed * Time.deltaTime;
         
-        EnemyObject.transform.position = MoveVector;
+        gameObject.transform.position = MoveVector;
         
         if(PathToFollow.Count==1)
             return;
         
-        if(EnemyObject.transform.position == TargetVector)
+        if(gameObject.transform.position == TargetVector)
         {
             T = 0;
             TargetTile = PathToFollow.Dequeue();
         }
-        Debug.Log($"remaining path:{PathToFollow.Count} and enemy:{EnemyObject}");
     }
 
     public override void EnemyEnd()
     {
         
+    }
+
+    public override void Retarget(TowerBase ATarget)
+    {
     }
 
 
@@ -54,19 +56,13 @@ public class EnemyMovementBehaviour : EnemyBehaviour
     }
 
 
-    public EnemyMovementBehaviour(Queue<Tile> APathToFollow,GameObject AEnemyObject)
+    public void InitialiseEnemyMovement(Queue<Tile> APathToFollow)
     {
-        
         int OriginalLength = APathToFollow.Count;
         
         for(int i = 0;i<OriginalLength;i++)
         {
             PathToFollow.Enqueue(APathToFollow.Dequeue());
-        }
-
-        if(AEnemyObject is not null)
-        {
-           EnemyObject = AEnemyObject; 
         }
             
     }
