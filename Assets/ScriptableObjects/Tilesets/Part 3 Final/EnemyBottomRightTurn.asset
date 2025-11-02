@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2aa0e18588244a159375512dcdf5927f, type: 3}
-  m_Name: TestEnemyShrine
+  m_Name: EnemyBottomRightTurn
   m_EditorClassIdentifier: 
-  tileMeshObject: {fileID: 919132149155446097, guid: 332ca44f9ab45bb4181e898fb29fcaa7, type: 3}
+  tileMeshObject: {fileID: 919132149155446097, guid: 480ae94786a0b7444b356604216feed5, type: 3}
   topConstraint: {fileID: 11400000, guid: 76be1895d7d8c194d9b7e2c55fdfdf29, type: 2}
-  rightConstraint: {fileID: 11400000, guid: 76be1895d7d8c194d9b7e2c55fdfdf29, type: 2}
+  rightConstraint: {fileID: 11400000, guid: 932263e008d1e6f4cae7e69b5ec9819c, type: 2}
   bottomConstraint: {fileID: 11400000, guid: 932263e008d1e6f4cae7e69b5ec9819c, type: 2}
   leftConstraint: {fileID: 11400000, guid: 76be1895d7d8c194d9b7e2c55fdfdf29, type: 2}

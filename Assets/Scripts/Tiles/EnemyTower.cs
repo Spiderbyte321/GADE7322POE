@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 public class EnemyTower : Tile
 {
     [SerializeField] private int EnemySpawnDelay=2;
-    [SerializeField] private GameObject[] EnemyTypes;
     [SerializeField] private int[] AttackSpeedRange;
     [SerializeField] private int[] AttackDamageRange;
     private List<Tile> ConnectedPath = new List<Tile>();

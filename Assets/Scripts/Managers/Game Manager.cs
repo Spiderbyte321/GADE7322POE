@@ -69,8 +69,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(NextWave());
     }
 
-
-    private void Start()
+    private void Awake()
     {
         if(Instance is null)
         {
@@ -81,6 +80,12 @@ public class GameManager : MonoBehaviour
             Destroy(Instance);
             Instance = this;
         }
+    }
+
+
+    private void Start()
+    {
+        
         
         StartCoroutine(IncrementIncome());
         StartCoroutine(GameTimer());

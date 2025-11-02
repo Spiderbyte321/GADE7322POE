@@ -41,7 +41,7 @@ public abstract class EnemyBase : MonoBehaviour
     private void EnemyDied()
     {
         if(GameManager.Instance is null)
-                    return;
+            return;
                 
         OnEnemyDied?.Invoke(this);
         Behaviour.EnemyEnd();

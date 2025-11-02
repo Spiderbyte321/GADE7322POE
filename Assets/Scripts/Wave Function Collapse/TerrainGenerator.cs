@@ -16,7 +16,9 @@ public class TerrainGenerator : Pathfinder
     [SerializeField] private GameObject PlayerTowerPrefab;
     [SerializeField] private TileSet EnemyTower;
     [SerializeField] private GameObject EnemyTowerPrefab;
-    [SerializeField] private TileSet TransitionTileSet;
+    [SerializeField] private TileSet[] TransitionTileSets;//ohhhh dear I need to rework this
+    //no wait I don't I just need to adjust it...maybe
+    [SerializeField] private TileSet[] PathTileSets;
     [SerializeField] private TileSet PlayerDefenderSet;
     [SerializeField] private GameObject PayerDefenderPrefab;
     [SerializeField] private int EnemyShrinesAmount;
@@ -212,27 +214,21 @@ public class TerrainGenerator : Pathfinder
     
     
 
-    private void CreatePathways()
-    {
-
+    private void CreatePathways()//Should be marking these as paths rather than just collapsing
+    {//Just give them onlypaths and let the WFC handle the rest Sweet!
         foreach (List<Tile> path in Paths)
         {
-
+            foreach (Tile pathPoint in path)
+            {
+                pathPoint.AmendTileInfo(PathTileSets);
+            }
+            
             Tile TransitionTile;
             int testint = UnityEngine.Random.Range(minimumTransitionDistanceFromTower, path.Count / 2);
             TransitionTile = path[testint];//chat to erin about this
-            TransitionTile.Collapse(TransitionTileSet);
+            TransitionTile.AmendTileInfo(TransitionTileSets);
             TransitionTiles.Add(path,TransitionTile);
-            
-            foreach (Tile pathpoint in path)
-            {
-                pathpoint.Collapse();
-                PropogateCollapse(pathpoint);
-                CollapsedTiles.Add(pathpoint);
-            }
         }
-
-        
     }
 
     private void PlaceAllyTowerSpots()
@@ -265,7 +261,7 @@ public class TerrainGenerator : Pathfinder
                 
                 foreach (Tile neighbour in TilePointNeighbours)
                 {
-                    if (neighbour.Collapsed)
+                    if (neighbour.Reserved)//need to indicate if path... I know how
                         continue;
 
                     

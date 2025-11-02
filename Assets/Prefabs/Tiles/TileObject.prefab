@@ -108,6 +108,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7eb80f301e4a61f4fb11ea53237bab3b, type: 2}
   - {fileID: 11400000, guid: fc73e6f567d523643829621c469b3312, type: 2}
   - {fileID: 11400000, guid: 777a1988d4051f34582308d23c19426d, type: 2}
+  - {fileID: 11400000, guid: 8c5f1efa62af69c4c8aeba7a0d30d7be, type: 2}
+  - {fileID: 11400000, guid: f25b85b8d8f59524c94dacac791d3e93, type: 2}
+  - {fileID: 11400000, guid: 58625587bfe94ff4881fd53eb800d15a, type: 2}
+  - {fileID: 11400000, guid: 6973b279680dfde42b20dada2ff2b781, type: 2}
+  - {fileID: 11400000, guid: f5899be74200ab849b0796c859d07407, type: 2}
+  - {fileID: 11400000, guid: 06b3b41e1a2499d468fb26853840eb97, type: 2}
+  - {fileID: 11400000, guid: 3dd08739d670dd84596266f0d1b99971, type: 2}
   Default: {fileID: 11400000, guid: ffa9f4ede98d5694cae5605e7d352d65, type: 2}
 --- !u!65 &588256057818076219
 BoxCollider:

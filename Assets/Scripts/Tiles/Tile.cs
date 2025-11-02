@@ -13,12 +13,15 @@ using Random = UnityEngine.Random;
         [SerializeField] private TileSet Default;
         private TileSet collapseInfo;
         private bool collapsed;
+        private bool reserved;
         private Vector2Int tilePosition;
 
         public bool Collapsed => collapsed;
         public int Entropy => TileInfo.Count;
         public TileSet CollapseInfo => collapseInfo;
         public Vector2Int TilePosition => tilePosition;
+
+        public bool Reserved => reserved;
 
         
 
@@ -39,6 +42,17 @@ using Random = UnityEngine.Random;
             }
         }//takes in direction of origin constraint and what it is check if each of our tilesets have that if not chuck it
 
+
+        public void AmendTileInfo(TileSet[] ANewTileInfo)
+        {
+            TileInfo.Clear();
+            foreach (TileSet newTileSet in ANewTileInfo)
+            {
+                TileInfo.Add(newTileSet);
+            }
+
+            reserved = true;
+        }
         public void Collapse()//Randomly selects any
         {
             if(collapsed)
