@@ -112,7 +112,8 @@ MonoBehaviour:
   AttackSpeed: 0.2
   AttackDamage: 50
   HealthBar: {fileID: 3061609759866980532}
-  upgradeManager: {fileID: 1149920382326354816}
+  unupgradedMesh: {fileID: 0}
+  upgradedMesh: {fileID: 0}
 --- !u!114 &1149920382326354816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +510,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4354688734933514747}
     m_Modifications:
+    - target: {fileID: -5627587779351812664, guid: d4cfe81f9d5626447b7380684e288171, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917261012071931834, guid: d4cfe81f9d5626447b7380684e288171, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3629028326440304431, guid: d4cfe81f9d5626447b7380684e288171, type: 3}
       propertyPath: m_Name
       value: HealthCanvasScreenSpaceWorl

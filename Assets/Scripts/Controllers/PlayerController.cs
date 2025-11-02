@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -89,18 +89,24 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseUpgrade()
     {
+        Debug.Log("Player Chose to upgrade");
         //keeps a dictionary of ints and strings 
         //no can't cause then we're not using the towers upgrades
         //ugggggh
         //hmm Iupgradable coul return the upgrade manager
+        //uggggh I should've planned this better but I have to keep moving on
 
         IUpgradable upgradable;
-        if(!Hit.collider.TryGetComponent(out upgradable))
-            return;
-        
-
-        if (GameManager.Instance.PlayerCurrency < UpgradeManager.Upgrades[chosenUpgrade].UpgradeCost)
+        if (!Hit.collider.TryGetComponent(out upgradable))
         {
+            Debug.Log(Hit.collider.name);
+           return; 
+        }
+        
+        
+        if(GameManager.Instance.PlayerCurrency < UpgradeManager.Upgrades[chosenUpgrade].UpgradeCost)
+        {
+            Debug.Log("Poor");
             return;
         }
         

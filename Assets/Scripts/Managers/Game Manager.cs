@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        StopAllCoroutines();
         Time.timeScale = 1f;
         SceneManager.LoadScene("SampleScene");
     }

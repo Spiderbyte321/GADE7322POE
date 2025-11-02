@@ -26,6 +26,7 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     public delegate void TowerDiedAction(TowerBase deadTower);
 
     public static event TowerDiedAction OnTowerDied;
+    
 
     public int MaxHealth => maxhealth;
     public int CurrentHealth => currenthealth;
@@ -69,6 +70,7 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
 
     private void ApplyUpgrade(Upgrade AUpgrade)
     {
+        Debug.Log("Upgrading");
         maxhealth += AUpgrade.MaxHealthIncrease;
         currenthealth += AUpgrade.CurrentHealthIncrease;
         AttackDamage += AUpgrade.AttackDamageIncrease;
@@ -91,7 +93,9 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
 
     public void Upgrade(Upgrade AUpgrade)
     {
+        Debug.Log("Upgrading on tower");
         ApplyUpgrade(AUpgrade);
     }
+    
     
 }
