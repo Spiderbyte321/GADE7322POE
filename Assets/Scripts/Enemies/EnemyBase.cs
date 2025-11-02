@@ -36,12 +36,13 @@ public abstract class EnemyBase : MonoBehaviour
     {
         TowerBase.OnTowerDied -= TowerDied;
     }
+    
 
-    private void OnDestroy()
+    private void EnemyDied()
     {
         if(GameManager.Instance is null)
-            return;
-        
+                    return;
+                
         OnEnemyDied?.Invoke(this);
         Behaviour.EnemyEnd();
     }
@@ -91,6 +92,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         if(currentHealth<=0)
         {
+            EnemyDied();
           Destroy(gameObject);  
         }
 

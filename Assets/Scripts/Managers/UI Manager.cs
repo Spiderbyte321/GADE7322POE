@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
 
     private void ShowGameOverScreen(bool isWon)
     {
+        
 
         MainPLayerUI.alpha = 0;
         MainPLayerUI.interactable = false;
