@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4581728198595679125}
   - component: {fileID: 5714741632723511706}
   - component: {fileID: 8365209440540062788}
+  - component: {fileID: 7083878171056934446}
   - component: {fileID: -5627587779351812664}
   m_Layer: 5
   m_Name: HealthCanvasScreenSpaceWorl
@@ -117,6 +118,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthSlider: {fileID: 2732982751206375479}
+--- !u!114 &7083878171056934446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629028326440304431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7943ddba5523fd946ab996e1628fcf4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &-5627587779351812664
 CanvasGroup:
   m_ObjectHideFlags: 0

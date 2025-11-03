@@ -165,9 +165,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
+        Debug.Log("start");
         yield return new WaitForSeconds(3);
         
-        Debug.Log("start");
         OnWaveBeaten?.Invoke();
         OnNextWaveStart?.Invoke();
     }

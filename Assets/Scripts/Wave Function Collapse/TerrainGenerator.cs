@@ -470,4 +470,14 @@ public class TerrainGenerator : Pathfinder
 
         return ReturnArray.ToArray();
     }
+
+
+    public void ReplaceSpot(Transform ReplacementPoint)
+    {
+        GameObject SpawnedObject =Instantiate(PayerDefenderPrefab, ReplacementPoint.position, quaternion.identity);
+        SpawnedObject.transform.SetParent(TileParent.transform);
+        Tile SpawnedTile;
+        SpawnedObject.TryGetComponent(out SpawnedTile);
+        SpawnedTile.Collapse(PlayerDefenderSet);
+    }
 }

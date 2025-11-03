@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]private float MoveSpeed;
     [SerializeField]private float MoveTime;
-    //private bool isRotating;
+    private bool isRotating;
     private Vector3 MovementVector  = new Vector3();
     private Quaternion RotationQuaternion = new Quaternion();
 
@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
             MovementVector += transform.right * MoveSpeed;
         }
 
-        /*if(Input.GetKey(KeyCode.Q)&&!isRotating)
+        if(Input.GetKey(KeyCode.Q)&&!isRotating)
         {
             RotationQuaternion *= Quaternion.Euler(Vector3.up*90);
             isRotating = true;
@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
         {
             isRotating = false;
         }
-        RotationHandler();*/
+        RotationHandler();
         transform.position = Vector3.Lerp(transform.position, MovementVector,Time.deltaTime* MoveTime);
     }
     

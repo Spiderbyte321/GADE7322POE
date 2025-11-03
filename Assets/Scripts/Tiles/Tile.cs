@@ -75,7 +75,6 @@ using Random = UnityEngine.Random;
         {
             if(collapsed)
             {
-                 Debug.Log("Already Collapsed");
                  return;
             }
                

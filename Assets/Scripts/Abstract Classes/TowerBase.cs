@@ -36,9 +36,12 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     {
         currenthealth -= ADamage;
         HealthBar.SetHealth(currenthealth);
-        if(currenthealth<0)
+        if (currenthealth < 0)
+        {
+            TowerDied(); 
             Destroy(gameObject);
-            
+           TerrainGenerator.Instance.ReplaceSpot(gameObject.transform);
+        }
     }
     
     
@@ -86,14 +89,13 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
        return RoundedSeconds /=100;
     }
 
-    private void OnDestroy()
+    private void TowerDied()
     {
-        OnTowerDied?.Invoke(this);
+         OnTowerDied?.Invoke(this);
     }
 
     public void Upgrade(Upgrade AUpgrade)
     {
-        Debug.Log("Upgrading on tower");
         ApplyUpgrade(AUpgrade);
     }
     

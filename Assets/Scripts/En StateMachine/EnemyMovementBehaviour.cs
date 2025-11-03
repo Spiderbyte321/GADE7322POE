@@ -28,6 +28,7 @@ public class EnemyMovementBehaviour : EnemyBehaviour
         
          T += Movespeed * Time.deltaTime;
         
+       gameObject.transform.LookAt(TargetVector);
         gameObject.transform.position = MoveVector;
         
         if(PathToFollow.Count==1)
