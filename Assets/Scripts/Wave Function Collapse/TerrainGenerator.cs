@@ -275,11 +275,11 @@ public class TerrainGenerator : Pathfinder
                 EDirection DirectionToRoad =
                     DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);
 
-                PLayerTowerConstraints[DirectionToRoad] = ScriptableObject.CreateInstance<PathConstraint>();
+                PLayerTowerConstraints[DirectionToRoad] = ScriptableObject.CreateInstance<WallConstraint>();
 
                 foreach (EDirection direction in Enum.GetValues(typeof(EDirection)))
                 {
-                    PLayerTowerConstraints.TryAdd(direction, ScriptableObject.CreateInstance<PathConstraint>());
+                    PLayerTowerConstraints.TryAdd(direction, ScriptableObject.CreateInstance<WallConstraint>());
                 }
                 
                 
