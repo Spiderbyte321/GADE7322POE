@@ -21,7 +21,7 @@ public class BackgroundMeshGenerator : MonoBehaviour
         Volume = new float[Width, Height, Depth];
 
         //assign to each float value within the volume a random number between 0 and 1
-        for(int X = 0; X < Width-1; X++)
+        for(int X = 0; X <Width-1; X++)
         {
             for(int Y=0;Y<Height-1;Y++)
             {
@@ -47,11 +47,11 @@ public class BackgroundMeshGenerator : MonoBehaviour
         }
 
         
-        for (int X = 0; X < Width-1; X++)//loop over entire grid and march the cubes
+        for (int X = 0; X <Width-1; X++)//loop over entire grid and march the cubes
         {
-            for (int Y = 0; Y < Height-1; Y++)
+            for (int Y = 0; Y <Height-1; Y++)
             {
-                for (int Z = 0; Z < Depth-1; Z++)
+                for (int Z = 0; Z <Depth-1; Z++)
                 {
                     float[] CubeCornerValues = new float[8];
 
