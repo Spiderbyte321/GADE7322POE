@@ -44,12 +44,13 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     {
         currenthealth -= ADamage;
         HealthBar.SetHealth(currenthealth);
-        if (currenthealth < 0)
+        if(currenthealth < 0)
         {
             TowerDied(); 
             Destroy(gameObject);
            TerrainGenerator.Instance.ReplaceSpot(gameObject.transform);
         }
+        OnTowerStatsModified?.Invoke();
     }
     
     
@@ -90,6 +91,8 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
            unupgradedMesh.SetActive(false); 
         }
         upgradedMesh.SetActive(true);
+        HealthBar.InitialiseHealthBar(MaxHealth);
+        HealthBar.SetHealth(currenthealth);
         OnTowerStatsModified?.Invoke();
     }
 
