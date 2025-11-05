@@ -271,7 +271,9 @@ public class TerrainGenerator : Pathfinder
                 Dictionary<EDirection, EdgeConstraint> PLayerTowerConstraints =
                                         new Dictionary<EDirection, EdgeConstraint>();
                 //Index out of bounds here must fix
-                Tile ChosenPlacement = PossiblePlacements[UnityEngine.Random.Range(0, PossiblePlacements.Count-1)];
+                int TileInt = UnityEngine.Random.Range(0, PossiblePlacements.Count - 1);
+                Debug.Log(TileInt);
+                Tile ChosenPlacement = PossiblePlacements[TileInt];
                 EDirection DirectionToRoad =
                     DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);
 
@@ -379,8 +381,6 @@ public class TerrainGenerator : Pathfinder
 
             if(AmendNeighbour.TilePosition.x+1<GridBreadth&&GridTiles[AmendNeighbour.TilePosition.x + 1, AmendNeighbour.TilePosition.y].Collapsed)
             {
-
-                
                 EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
                     GridTiles[AmendNeighbour.TilePosition.x + 1, 
                         AmendNeighbour.TilePosition.y]);
@@ -390,9 +390,6 @@ public class TerrainGenerator : Pathfinder
             
             if(AmendNeighbour.TilePosition.x-1>0&&GridTiles[AmendNeighbour.TilePosition.x - 1, AmendNeighbour.TilePosition.y].Collapsed)
             {
-
-                
-                
                 EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
                     GridTiles[AmendNeighbour.TilePosition.x - 1, 
                         AmendNeighbour.TilePosition.y]);
@@ -402,7 +399,6 @@ public class TerrainGenerator : Pathfinder
             
             if(AmendNeighbour.TilePosition.y+1<GridHeight&&GridTiles[AmendNeighbour.TilePosition.x, AmendNeighbour.TilePosition.y+1].Collapsed)
             {
-                
                 EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
                     GridTiles[AmendNeighbour.TilePosition.x, 
                         AmendNeighbour.TilePosition.y+1]);
@@ -412,7 +408,6 @@ public class TerrainGenerator : Pathfinder
             
             if (AmendNeighbour.TilePosition.y-1>0&&GridTiles[AmendNeighbour.TilePosition.x , AmendNeighbour.TilePosition.y-1].Collapsed)
             {
-                
                 EDirection Direction = DirectionUtilities.ReturnTileDirection(AmendNeighbour,
                     GridTiles[AmendNeighbour.TilePosition.x, 
                         AmendNeighbour.TilePosition.y-1]);

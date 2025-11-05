@@ -38,9 +38,9 @@ public class PlayerNexus : TowerBase//attacking logic for player tower
                 CurrentTarget = Targets.Dequeue();
             
             
-            CurrentTarget.TakeDamage(AttackDamage,this);
+            CurrentTarget.TakeDamage(attackDamage,this);
 
-            float RoundedSeconds = RoundToTwoDecimalPLaces(AttackSpeed / 60);
+            float RoundedSeconds = RoundToTwoDecimalPLaces(attackSpeed);
             
              yield return new WaitForSeconds(RoundedSeconds);
         }  

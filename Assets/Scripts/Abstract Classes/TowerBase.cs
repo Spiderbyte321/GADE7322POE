@@ -1,14 +1,15 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public abstract class TowerBase : MonoBehaviour,IUpgradable
 {
     
     [SerializeField] protected int maxhealth;
     [SerializeField] protected int targetMax;
-    [SerializeField] protected float AttackSpeed;
-    [SerializeField] protected int AttackDamage;
+    [SerializeField] protected float attackSpeed; 
+    [SerializeField] protected int attackDamage;
     [SerializeField] protected HealthBarController HealthBar;
     [SerializeField] private GameObject unupgradedMesh;
     [SerializeField] private GameObject upgradedMesh;
@@ -26,11 +27,18 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     public delegate void TowerDiedAction(TowerBase deadTower);
 
     public static event TowerDiedAction OnTowerDied;
+
+    public delegate void TowerStatsModifiedAction();
+
+    public static event TowerStatsModifiedAction OnTowerStatsModified;
     
 
     public int MaxHealth => maxhealth;
     public int CurrentHealth => currenthealth;
-    
+
+    public float AttackSpeed => attackSpeed;
+
+    public int AttackDamage => attackDamage;
 
     public virtual void TakeDamage(int ADamage)
     {
@@ -73,13 +81,16 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
 
     private void ApplyUpgrade(Upgrade AUpgrade)
     {
-        Debug.Log("Upgrading");
         maxhealth += AUpgrade.MaxHealthIncrease;
         currenthealth += AUpgrade.CurrentHealthIncrease;
-        AttackDamage += AUpgrade.AttackDamageIncrease;
-        AttackSpeed += AUpgrade.AttackSpeedIncrease;
-        unupgradedMesh.SetActive(false);
+        attackDamage += AUpgrade.AttackDamageIncrease;
+        attackSpeed += AUpgrade.AttackSpeedIncrease;
+        if (unupgradedMesh is not null)
+        {
+           unupgradedMesh.SetActive(false); 
+        }
         upgradedMesh.SetActive(true);
+        OnTowerStatsModified?.Invoke();
     }
 
     protected float RoundToTwoDecimalPLaces(float AFloat)

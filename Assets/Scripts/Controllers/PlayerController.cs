@@ -99,14 +99,12 @@ public class PlayerController : MonoBehaviour
         IUpgradable upgradable;
         if (!Hit.collider.TryGetComponent(out upgradable))
         {
-            Debug.Log(Hit.collider.name);
            return; 
         }
         
         
         if(GameManager.Instance.PlayerCurrency < UpgradeManager.Upgrades[chosenUpgrade].UpgradeCost)
         {
-            Debug.Log("Poor");
             return;
         }
         

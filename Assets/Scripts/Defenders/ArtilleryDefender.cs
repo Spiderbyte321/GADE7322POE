@@ -82,7 +82,7 @@ public class ArtilleryDefender : TowerBase
         EnemyBase positiontarget = null;
         while (Targets.Count > 0)
         {
-            yield return new WaitForSeconds(AttackSpeed);
+            yield return new WaitForSeconds(attackSpeed);
 
             charge++;
             ChargeBar.SetHealth(charge);
@@ -123,7 +123,7 @@ public class ArtilleryDefender : TowerBase
                     continue;
                 }
                 
-                enemyTarget.Blast(AttackDamage);
+                enemyTarget.Blast(attackDamage);
                 
             }
 
