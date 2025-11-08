@@ -4841,6 +4841,7 @@ GameObject:
   - component: {fileID: 1612896599}
   - component: {fileID: 1612896598}
   - component: {fileID: 1612896601}
+  - component: {fileID: 1612896602}
   m_Layer: 0
   m_Name: BackGroundMesh
   m_TagString: Untagged
@@ -4912,7 +4913,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff76efde438ea0b4c8cb8012e113a423, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4934,6 +4935,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1612896602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612896597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aeb2294d27539743adaef67e219334d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShadedMaterials:
+  - {fileID: 2100000, guid: 201be5ed4c357c0418173815aabecb9b, type: 2}
+  - {fileID: 2100000, guid: 5d07783e15c4e0448b4be511e3394a65, type: 2}
+  - {fileID: 2100000, guid: 9dc472b94992f23428c6a3867bef9cbc, type: 2}
+  - {fileID: 2100000, guid: 8de52a7238511224bb1ab495c29b0c39, type: 2}
+  - {fileID: 2100000, guid: a8e73d165b5ca3c4bb03905c088b168b, type: 2}
+  - {fileID: 2100000, guid: b1d4a4056b981c14289a235a82efef6e, type: 2}
+  Renderer: {fileID: 1612896601}
 --- !u!1 &1637889845
 GameObject:
   m_ObjectHideFlags: 0
