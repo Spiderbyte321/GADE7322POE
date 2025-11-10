@@ -31,26 +31,7 @@ public class BasicEnemy : EnemyBase
     public override void TakeDamage(int ADamage,TowerBase ATarget)
     {
         base.TakeDamage(ADamage,ATarget);
-
-        /*Queue<Tile> RemainingPath = new Queue<Tile>();
-
-        if(Behaviour is EnemyMovementBehaviour)
-             RemainingPath = Behaviour.GetRemainingPath();
         
-          
-        Debug.Log($"Remaining path:{RemainingPath.Count}");
-        
-        int TotalTiles = RemainingPath.Count;
-        
-        if(PathOrder.Count!=0)
-            PathOrder.Clear();
-        
-        for(int i = 0; i < TotalTiles; i++)
-        {
-            PathOrder.Enqueue(RemainingPath.Dequeue());
-        }*/
-
-
         Behaviour = attackingBehaviour;
         Behaviour.Retarget(Target);
         Behaviour.EnemyStart();
@@ -59,14 +40,11 @@ public class BasicEnemy : EnemyBase
 
     protected override void TowerDied(TowerBase DeadTower)
     {
-        Debug.Log("resumin");
         if(DeadTower is PlayerNexus)
             return;
         
         if(Target == DeadTower)
         {
-            Debug.Log("killed player");
-            Debug.Log(PathOrder.Count);
             Behaviour = movementBehaviour;
             Behaviour.EnemyStart();
         }

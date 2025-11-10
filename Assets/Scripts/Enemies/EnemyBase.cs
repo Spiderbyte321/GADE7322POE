@@ -6,7 +6,6 @@ using UnityEngine.InputSystem.OnScreen;
 public abstract class EnemyBase : MonoBehaviour
 {
     //From now on state machines stay as monobehaviours
-    
     [SerializeField]protected int maxHealth = 150;
     [SerializeField]protected int AttackDamage;
     [SerializeField]protected int AttackSpeed;
@@ -40,9 +39,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void EnemyDied()
     {
-        if(GameManager.Instance is null)
+        if (GameManager.Instance is null)
+        {
             return;
-                
+        }
+        
         OnEnemyDied?.Invoke(this);
         Behaviour.EnemyEnd();
     }
@@ -50,10 +51,6 @@ public abstract class EnemyBase : MonoBehaviour
 
     public void InitialiseEnemy(List<Tile> APathToFollow,int AAttackSpeed,int AAttackDamage)
     {
-        /*foreach (Tile tile in APathToFollow)
-        {
-            PathToFollow.Add(tile);
-        }*/
 
         AttackSpeed += AAttackSpeed;
         AttackDamage += AAttackDamage;
@@ -61,7 +58,6 @@ public abstract class EnemyBase : MonoBehaviour
         if (AttackSpeed <= 0)//Safety Nets
         {
             AttackSpeed = 10;
-            
         }
 
         if (AttackDamage <= 0)
@@ -91,11 +87,10 @@ public abstract class EnemyBase : MonoBehaviour
         healthbar.SetHealth(currentHealth);
 
         if(currentHealth<=0)
-        {
+        { 
             EnemyDied();
           Destroy(gameObject);  
         }
-
         Target = ATarget;
     }
 

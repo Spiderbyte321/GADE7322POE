@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class EnemyAttackingBehaviour : EnemyBehaviour//attacks back at what's attacking
 {
-    //Find a way to get them the target when they get to it
-    
     private int AttackSpeed;
     private int AttackDamage;
     private TowerBase Target;

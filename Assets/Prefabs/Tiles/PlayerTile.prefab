@@ -413,10 +413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcd39552eee04e40bd413e86a02e000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhealth: 5000
+  maxhealth: 500
   targetMax: 50
-  attackSpeed: 0
-  attackDamage: 0
+  attackSpeed: 2
+  attackDamage: 100
   HealthBar: {fileID: 4759738796909567753}
   unupgradedMesh: {fileID: 0}
   upgradedMesh: {fileID: 190828507606127465}

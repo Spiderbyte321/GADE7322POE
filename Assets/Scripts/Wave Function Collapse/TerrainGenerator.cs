@@ -280,7 +280,6 @@ public class TerrainGenerator : Pathfinder
                 int TileInt = UnityEngine.Random.Range(0, PossiblePlacements.Count - 1);
                 if(PossiblePlacements.Count==0)
                     continue;
-                Debug.Log(TileInt);
                 Tile ChosenPlacement = PossiblePlacements[TileInt];
                 EDirection DirectionToRoad =
                     DirectionUtilities.ReturnTileDirection(ChosenPlacement, PlayerPath[RandomTileIndex]);

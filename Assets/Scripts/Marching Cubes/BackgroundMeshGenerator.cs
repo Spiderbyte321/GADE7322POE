@@ -67,11 +67,6 @@ public class BackgroundMeshGenerator : MonoBehaviour
         }
         
         
-        
-        
-        //might not be what we want and or need according to POE
-        
-        //Assign our generated mesh to a filter to display
         Mesh mesh = new Mesh();
         Vertices.Reverse();
         mesh.vertices = Vertices.ToArray();

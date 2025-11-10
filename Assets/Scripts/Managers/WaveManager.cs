@@ -71,7 +71,6 @@ public class WaveManager : MonoBehaviour
         for(int i=0;i<normalisedThresholds.Count;i++)//add them to  the dictionary
         {
             EnemyThresholds.Add(normalisedThresholds[i],EnemyObjects[i]);
-            Debug.Log(normalisedThresholds[i]);
         }
 
         GraphOffset = 0.5f;
@@ -81,7 +80,6 @@ public class WaveManager : MonoBehaviour
     {
         waveTotalThreshold = 0;
         DifficultyThreshold = 3 * waveCount;
-        Debug.Log("Creating next wave");
         while (waveTotalThreshold < DifficultyThreshold)
         {
 

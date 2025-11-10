@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("ran");
+       
         MoneyTextBox.text = 0.ToString();
     }
     

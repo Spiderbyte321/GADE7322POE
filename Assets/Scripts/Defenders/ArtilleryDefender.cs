@@ -37,44 +37,19 @@ public class ArtilleryDefender : TowerBase
 
     protected override void OnTriggerEnter(Collider other)
     {
-       
-        
         base.OnTriggerEnter(other);
-         Debug.Log("collided");
         if(FoundEnemy is not null)
         {
-            Debug.Log("Adding");
             Targets.Add(FoundEnemy);
         }
         
         
         if(Targets.Count == 1)
         {
-            //Debug.Log($"{Targets.Count}");
             StartCoroutine(LaunchShell());
         }
     }
-
-    /*private void OnTriggerExit(Collider other)
-    {
-        if (other is null)
-            return;
-        
-        
-        if (!other.TryGetComponent(out EnemyBase LeftEnemy))
-        {
-            return;
-        }
-
-        if (Targets.Remove(LeftEnemy))
-        {
-            Debug.Log("removed Target");
-        }
-    }*/
     
-    //ok no there needs to be a better way
-    // how about instead we get the transfrom and use the position rather than getting it from the enemy
-
 
     private IEnumerator LaunchShell()
     {

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private bool gameOver;
 
-    private int DeadEnemyCount = 0;
+    private int DeadEnemyCount = 1;
 
     public int CurrentTime => currentTime;
 
@@ -64,8 +64,7 @@ public class GameManager : MonoBehaviour
         if(DeadEnemyCount < WaveManager.instance.MaxWaveCount) 
             return;
         
-        Debug.Log("starting next wave");
-        DeadEnemyCount = 0;
+        DeadEnemyCount = 1;
         StartCoroutine(NextWave());
     }
 
@@ -85,8 +84,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
-        
         StartCoroutine(IncrementIncome());
         StartCoroutine(GameTimer());
         StartCoroutine(NextWave());
@@ -100,8 +97,6 @@ public class GameManager : MonoBehaviour
         {
             playerCurrency += incomeAmount;
             OnPLayerUIAction?.Invoke();
-            //float SecondsToWait;
-            //SecondsToWait = MathUtilities.RoundToTwoDecimalPLaces(rateOfIncome / 60);
             yield return new WaitForSeconds(rateOfIncome);
         }
     }
@@ -165,7 +160,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
-        Debug.Log("start");
         yield return new WaitForSeconds(3);
         
         OnWaveBeaten?.Invoke();
