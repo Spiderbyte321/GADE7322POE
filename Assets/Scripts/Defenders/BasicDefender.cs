@@ -34,6 +34,8 @@ public class BasicDefender : TowerBase//actual tower that will do attacking logi
             CurrentTarget.TakeDamage(attackDamage,this);
 
             float RoundedSeconds = RoundToTwoDecimalPLaces(AttackSpeed);
+            if(animator.enabled) 
+                animator.LoopAnimation();
             
             yield return new WaitForSeconds(RoundedSeconds);
         }  

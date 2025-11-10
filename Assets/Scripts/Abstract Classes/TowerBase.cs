@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
 
 public abstract class TowerBase : MonoBehaviour,IUpgradable
 {
@@ -11,11 +10,12 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     [SerializeField] protected float attackSpeed; 
     [SerializeField] protected int attackDamage;
     [SerializeField] protected HealthBarController HealthBar;
-    [SerializeField] private GameObject unupgradedMesh;
+    [SerializeField] protected GameObject unupgradedMesh;
     [SerializeField] private GameObject upgradedMesh;
-    
-    
+    [SerializeField] protected ProceduralAnimator animator;
 
+
+    private Tile connectedTile;
     protected EnemyBase CurrentTarget;
     protected int currenthealth;
     protected EnemyBase FoundEnemy;
@@ -39,6 +39,23 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     public float AttackSpeed => attackSpeed;
 
     public int AttackDamage => attackDamage;
+    
+
+    private void OnEnable()
+    {
+        TerrainGenerator.MapGeneratedAction += GetAnimator;
+    }
+
+    private void OnDisable()
+    {
+        TerrainGenerator.MapGeneratedAction -= GetAnimator;
+    }
+
+    private void GetAnimator(Tile playerBAse)
+    {
+        unupgradedMesh = playerBAse.TileMesh;
+        unupgradedMesh.SetActive(true);
+    }
 
     public virtual void TakeDamage(int ADamage)
     {
@@ -51,6 +68,8 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
            TerrainGenerator.Instance.ReplaceSpot(gameObject.transform);
         }
         OnTowerStatsModified?.Invoke();
+        if(animator.enabled) 
+            animator.PlayDamagedAnimation();
     }
     
     
@@ -86,10 +105,7 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
         currenthealth += AUpgrade.CurrentHealthIncrease;
         attackDamage += AUpgrade.AttackDamageIncrease;
         attackSpeed += AUpgrade.AttackSpeedIncrease;
-        if (unupgradedMesh is not null)
-        {
-           unupgradedMesh.SetActive(false); 
-        }
+        unupgradedMesh.SetActive(false); 
         upgradedMesh.SetActive(true);
         HealthBar.InitialiseHealthBar(MaxHealth);
         HealthBar.SetHealth(currenthealth);
@@ -112,6 +128,4 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
     {
         ApplyUpgrade(AUpgrade);
     }
-    
-    
 }

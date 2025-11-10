@@ -11,7 +11,7 @@ public class ProceduralAnimator : MonoBehaviour
     [SerializeField] private Transform[] PositionsToMoveTo;
     [SerializeField] private Transform[] ExplosionOrigins;
     [SerializeField] private GameObject mainTarget;
-    [SerializeField] private float AnimationSpeed; 
+    [SerializeField] private float AnimationSpeed=1; 
     [SerializeField] private Rigidbody mainBody;
     private Vector3 mainOrigin;
     private int AnimationIndex =0;
@@ -23,32 +23,35 @@ public class ProceduralAnimator : MonoBehaviour
         mainOrigin = mainBody.position;
     }
 
-    private void Update()
+
+    public void LoopAnimation()
     {
-       PlayRandomised(); 
+        StartCoroutine(PlayAnimation());
     }
 
-    void PlayAnimation()//or not
+    private IEnumerator PlayAnimation()
     {
-        
-        if (AnimationIndex >= PositionsToMoveTo.Length)
-                    AnimationIndex = 0;
-        
-        Vector3 TargetVector = PositionsToMoveTo[AnimationIndex].position;
-        Vector3 MoveVector = Vector3.Lerp(mainTarget.transform.position, TargetVector, T);
-        
-        T += AnimationSpeed * Time.deltaTime;
-        
-        mainTarget.transform.position = MoveVector;
-
-
-        
-        
-        if(mainTarget.transform.position == TargetVector)
+        while(AnimationIndex != PositionsToMoveTo.Length)
         {
-            T = 0;
-            AnimationIndex++;
+            Vector3 TargetVector = PositionsToMoveTo[AnimationIndex].position;
+            Vector3 MoveVector = Vector3.Lerp(mainTarget.transform.position, TargetVector, T);
+                    
+            T += AnimationSpeed * Time.deltaTime;
+                    
+            mainTarget.transform.position = MoveVector;
+                    
+            if(mainTarget.transform.position == TargetVector)
+            {
+                T = 0;
+                AnimationIndex++;
+            }
+            yield return null;
         }
+    }
+
+    public void PlayDamagedAnimation()
+    {
+        PlayRandomised();
     }
 
     void PlayRandomised()
@@ -67,7 +70,6 @@ public class ProceduralAnimator : MonoBehaviour
          yield return new WaitForSeconds(0.1f);
          mainBody.isKinematic = true;
          float t = 0;
-
          while (mainTarget.transform.position !=mainOrigin)
          {
              yield return null;
@@ -77,7 +79,6 @@ public class ProceduralAnimator : MonoBehaviour
              
              mainTarget.transform.position = MoveVector;
          }
-
          isRunning = false;
     }
     

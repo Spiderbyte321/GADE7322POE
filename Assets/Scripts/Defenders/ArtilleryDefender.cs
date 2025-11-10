@@ -127,6 +127,8 @@ public class ArtilleryDefender : TowerBase
                 
                 enemyTarget.Blast(attackDamage);
                 
+                if(animator.enabled) 
+                    animator.LoopAnimation();
             }
 
             charge = 0;

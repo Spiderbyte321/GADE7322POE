@@ -15,6 +15,7 @@ using Random = UnityEngine.Random;
         private bool collapsed;
         private bool reserved;
         private Vector2Int tilePosition;
+        private GameObject tileMesh;
 
         public bool Collapsed => collapsed;
         public int Entropy => TileInfo.Count;
@@ -22,6 +23,7 @@ using Random = UnityEngine.Random;
         public Vector2Int TilePosition => tilePosition;
 
         public bool Reserved => reserved;
+        public GameObject TileMesh => tileMesh;
 
         
 
@@ -65,7 +67,7 @@ using Random = UnityEngine.Random;
                 return;
             }
             collapseInfo = TileInfo[Random.Range(0, TileInfo.Count)];
-            Instantiate(CollapseInfo.TileMeshObject,this.gameObject.transform);
+            tileMesh =Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
         
@@ -82,12 +84,10 @@ using Random = UnityEngine.Random;
             collapsed = true;
             TileSet ComparedSet = ATileSet;
             collapseInfo = ComparedSet;
-            Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
+            tileMesh =Instantiate(CollapseInfo.TileMeshObject,gameObject.transform);
             TileInfo.Clear();
             TileInfo.Add(collapseInfo);
-            
         }
-        
 
         private void CollapseToDefault()
         {

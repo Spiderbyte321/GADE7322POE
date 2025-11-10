@@ -40,6 +40,10 @@ public class TerrainGenerator : Pathfinder
 
     public IReadOnlyDictionary<Tile, List<Tile>> EnemyPaths => enemyPaths;
     public static TerrainGenerator Instance;
+
+    public delegate void OnMapGenerated(Tile playerBase);
+
+    public static event OnMapGenerated MapGeneratedAction;
     
     //idea for cleanup rework this script so that spawning a tile is a method that takes in what tile to spawn
 
@@ -83,6 +87,8 @@ public class TerrainGenerator : Pathfinder
           BuildGrid();
           CurrentTile=ChooseLowestEntropyTile();
         } while(CollapsedTiles.Count<GridTiles.Length);
+        
+        MapGeneratedAction?.Invoke(PlayerBase);
     }
     
 
