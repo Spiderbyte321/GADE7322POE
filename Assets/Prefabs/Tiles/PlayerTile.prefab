@@ -974,7 +974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3231398553212187597, guid: 2838af4ade27ec540af715c072df45e1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5513582030954773106, guid: 2838af4ade27ec540af715c072df45e1, type: 3}
       propertyPath: ExplosionOrigins.Array.size

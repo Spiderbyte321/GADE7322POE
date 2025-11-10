@@ -68,8 +68,7 @@ public abstract class TowerBase : MonoBehaviour,IUpgradable
            TerrainGenerator.Instance.ReplaceSpot(gameObject.transform);
         }
         OnTowerStatsModified?.Invoke();
-        if(animator.enabled) 
-            animator.PlayDamagedAnimation();
+        animator.PlayDamagedAnimation();
     }
     
     

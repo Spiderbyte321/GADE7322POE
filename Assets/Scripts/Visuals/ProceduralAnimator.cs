@@ -26,6 +26,9 @@ public class ProceduralAnimator : MonoBehaviour
 
     public void LoopAnimation()
     {
+        if(! gameObject.activeSelf)
+            return;
+        
         StartCoroutine(PlayAnimation());
     }
 
@@ -51,6 +54,9 @@ public class ProceduralAnimator : MonoBehaviour
 
     public void PlayDamagedAnimation()
     {
+        if(!gameObject.activeSelf)
+            return;
+        
         PlayRandomised();
     }
 

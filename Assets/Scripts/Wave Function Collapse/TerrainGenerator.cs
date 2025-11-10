@@ -278,6 +278,8 @@ public class TerrainGenerator : Pathfinder
                                         new Dictionary<EDirection, EdgeConstraint>();
                 //Index out of bounds here must fix
                 int TileInt = UnityEngine.Random.Range(0, PossiblePlacements.Count - 1);
+                if(PossiblePlacements.Count==0)
+                    continue;
                 Debug.Log(TileInt);
                 Tile ChosenPlacement = PossiblePlacements[TileInt];
                 EDirection DirectionToRoad =

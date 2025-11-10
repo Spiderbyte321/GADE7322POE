@@ -125,10 +125,8 @@ public class ArtilleryDefender : TowerBase
                     continue;
                 }
                 
-                enemyTarget.Blast(attackDamage);
-                
-                if(animator.enabled) 
-                    animator.LoopAnimation();
+                enemyTarget.Blast(attackDamage); 
+                animator.LoopAnimation();
             }
 
             charge = 0;

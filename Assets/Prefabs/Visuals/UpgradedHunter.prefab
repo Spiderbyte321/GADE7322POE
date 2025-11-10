@@ -269,6 +269,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
+--- !u!1 &6003134306569378923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617908116993833918}
+  - component: {fileID: 7937424859246490264}
+  m_Layer: 0
+  m_Name: TopRingTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1617908116993833918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003134306569378923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3150695295832452975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7937424859246490264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003134306569378923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b37cffab30b939469bac076fdd82c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_ConstrainedObject: {fileID: 2523081589965936471}
+    m_Source: {fileID: 1617908116993833918}
+    m_DampPosition: 0.5
+    m_DampRotation: 0.5
+    m_MaintainAim: 1
 --- !u!1 &6653394921032934723
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +400,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1617908116993833918}
   m_Father: {fileID: 4658664396106398503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4273378094489413218
@@ -480,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3f9a6b80c33a2ad48bbd254ac318a720, type: 3}
       propertyPath: m_Name
-      value: HunterSlimeTest
+      value: UpgradedHunter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -526,7 +578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PositionsToMoveTo: []
   ExplosionOrigins: []
-  mainTarget: {fileID: 8728137980253356959}
+  mainTarget: {fileID: 8721787547246975318}
   AnimationSpeed: 1
   mainBody: {fileID: 1391663716053688877}
 --- !u!4 &2523081589965936471 stripped
@@ -634,11 +686,6 @@ MonoBehaviour:
 --- !u!4 &8588036605104764059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7791721346432872861, guid: 3f9a6b80c33a2ad48bbd254ac318a720, type: 3}
-  m_PrefabInstance: {fileID: 1949799713320961286}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8728137980253356959 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7075022789337368217, guid: 3f9a6b80c33a2ad48bbd254ac318a720, type: 3}
   m_PrefabInstance: {fileID: 1949799713320961286}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8968060973620635033 stripped
