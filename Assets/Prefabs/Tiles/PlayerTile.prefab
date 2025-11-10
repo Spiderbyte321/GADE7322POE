@@ -507,6 +507,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6005007013615883280}
     m_Modifications:
+    - target: {fileID: 57593169443765710, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e009d761c07b7b47892df9ee81cae29, type: 3}
+    - target: {fileID: 1157077942082306493, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287132243499457142, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8d17eccb3ad299f42a4deb25ae6ad62d, type: 3}
     - target: {fileID: 1628731039181176689, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
       propertyPath: m_Name
       value: HealthCanvasScreenSpaceWorl
@@ -595,6 +607,18 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6531618721034294170, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 27af2d7c6d2ae064da2c0317326ad99d, type: 3}
+    - target: {fileID: 7323047785269400784, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323047785269400784, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.099
+      objectReference: {fileID: 0}
     - target: {fileID: 7556275260192559853, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
       propertyPath: attachedTower
       value: 
@@ -607,6 +631,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8415427416616973255, guid: 3251b1a17929add4bbedcc4285d66f7b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e79555d5b0442e74f96fd9862157e236, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

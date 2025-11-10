@@ -109,6 +109,8 @@ public class ArtilleryDefender : TowerBase
             if(targetsInRange.Length==0)
                 continue;
             
+            
+            
             foreach (Collider collider in targetsInRange)
             {
                 EnemyBase enemyTarget;
@@ -127,6 +129,7 @@ public class ArtilleryDefender : TowerBase
                 
             }
 
+            charge = 0;
         }
     }
 }

@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class AllyHealthCanvasController : HealthCanvasControllers
 {
-    [SerializeField] private TextMeshProUGUI maxhealthText;
-    [SerializeField] private TextMeshProUGUI currentHealthText;
-    [SerializeField] private TextMeshProUGUI attackDamageText;
-    [SerializeField] private TextMeshProUGUI attackSpeedText;
-    [SerializeField] private TowerBase attachedTower;
+    [SerializeField] protected TextMeshProUGUI maxhealthText;
+    [SerializeField] protected TextMeshProUGUI attackDamageText;
+    [SerializeField] protected TextMeshProUGUI attackSpeedText;
+    [SerializeField] protected TowerBase attachedTower;
     
     
     private void OnEnable()
@@ -25,11 +24,9 @@ public class AllyHealthCanvasController : HealthCanvasControllers
         UpdateText();
     }
     
-    private void UpdateText()
+    protected virtual void UpdateText()
    {
-       Debug.Log("Updating text");
        maxhealthText.text = attachedTower.MaxHealth+"";
-       currentHealthText.text = attachedTower.CurrentHealth + "";
        attackDamageText.text = attachedTower.AttackDamage + "";
        attackSpeedText.text = attachedTower.AttackSpeed + "";
    }
